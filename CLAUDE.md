@@ -35,11 +35,24 @@ Request flow: route → service → repository → store. Routes parse input (zo
 - `client/src/api/` + `client/src/hooks/` — one module and one hook per resource
 - `client/src/components/` — feature folders + shared `ui/` primitives
 - `shared/src/` — entities, envelope, and query types used by both tiers
-- `docs/adr/`, `docs/nfr/` — architectural decisions and NFR docs; `.claude/rules/` — scoped working rules
+- `docs/` — decisions (`adr/`), cross-cutting rules (`nfr/`), recipes (`best-practices/`)
+
+## Reference docs — read on demand
+
+This file is always in context; the docs below are NOT. Read the file when its trigger applies:
+
+| When you are…                                   | Read first                                            |
+| ----------------------------------------------- | ----------------------------------------------------- |
+| Getting oriented in the codebase                | `docs/architecture.md`                                |
+| Changing API response shapes or error codes     | `docs/adr/0001-shared-api-response-envelope.md`       |
+| Making a new architectural decision             | `docs/adr/template.md` (then add an ADR)              |
+| Calling or wrapping an external/third-party API | `docs/nfr/0001-external-api-error-handling.md`        |
+| Adding a new resource/entity                    | `docs/best-practices/adding-a-resource.md`            |
+| Writing or changing tests                       | `.claude/rules/testing.md` (auto-loads on test files) |
 
 ## Testing approach
 
-- Vitest, co-located with the module under test (`x.service.ts` → `x.service.test.ts`); details in `.claude/rules/testing.md`
+- Vitest, co-located with the module under test (`x.service.ts` → `x.service.test.ts`)
 - Server tests MUST create their data dir via `makeTestDb()` from `server/src/testing/helpers.ts` — never read or assert against the real seed data
 - Cover the error paths (404/409/validation) for any endpoint you touch — `tags.routes.test.ts` is the pattern
 - Run `npm test`, `npm run lint`, and `npm run typecheck` before every PR
