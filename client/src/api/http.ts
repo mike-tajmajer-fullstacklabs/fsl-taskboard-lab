@@ -47,5 +47,9 @@ export async function request<T>(
     throw new ApiError(res.status, code, message, details);
   }
 
-  return (await res.json()) as { data: T; meta?: PageMeta };
+  const body = (await res.json()) as { data: T; meta?: PageMeta };
+  if (body === null || typeof body !== 'object' || !('data' in body)) {
+    throw new ApiError(res.status, 'INTERNAL', 'Unexpected response shape from the API');
+  }
+  return body;
 }
