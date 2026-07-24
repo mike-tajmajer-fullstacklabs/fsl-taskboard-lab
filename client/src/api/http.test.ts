@@ -42,6 +42,13 @@ describe('request', () => {
     expect((err as ApiError).status).toBe(404);
   });
 
+  it('throws ApiError when a 2xx body is not the data envelope', async () => {
+    mockFetch(200, [{ id: 'tag_a' }]);
+    const err = await request('/api/tags').catch((e: unknown) => e);
+    expect(err).toBeInstanceOf(ApiError);
+    expect((err as ApiError).code).toBe('INTERNAL');
+  });
+
   it('falls back to a generic message when the error body is not JSON', async () => {
     vi.stubGlobal(
       'fetch',
