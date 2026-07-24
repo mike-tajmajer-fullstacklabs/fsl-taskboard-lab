@@ -52,7 +52,7 @@ Request flow: route → service → repository → store. Routes parse input (zo
 
 ## Do / Don't
 
-- Do: record architectural decisions in `docs/adr/` (template provided); put cross-cutting rules in `docs/nfr/`
+- Do: record architectural decisions in `docs/adr/` (template provided); put cross-cutting rules in `docs/nfr/` (copy the form of NFR-0001); team recipes live in `docs/best-practices/`
 - Do: reuse the tags vertical slice as the reference implementation when adding a resource
 - Don't: NEVER modify `server/data/seed.json` — it is the canonical baseline every lab resets to (also enforced by a deny rule and a PreToolUse hook); change data via the API or `db.json`, then `npm run reset-db`; done means seed.json has no diff
 - Don't: access `db.json` outside `server/src/repositories/` — routes and services never import `db/store.ts`
