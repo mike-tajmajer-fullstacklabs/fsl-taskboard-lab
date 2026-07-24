@@ -18,9 +18,10 @@ gh label create good-first-issue --color 7057ff --description "Small, well-scope
 gh label create governance --color 998dd9 --description "AI-governance / documentation work" --force
 
 echo "Creating issues…"
+# Bodies are fed via stdin (--body-file -) so this works on macOS's bash 3.2.
 
 gh issue create --title 'Stats "Completed this week" always shows 0' \
-  --label bug --label lab-1 --label good-first-issue --body "$(cat <<'EOF'
+  --label bug --label lab-1 --label good-first-issue --body-file - <<'EOF'
 ## What happens
 The "Completed this week" card on the Stats page shows 0 — even immediately after completing a todo.
 
@@ -35,10 +36,9 @@ The card should count todos completed within the last 7 days (the one you just c
 ## Notes
 The rest of the summary numbers (total/open/done) look right.
 EOF
-)"
 
 gh issue create --title 'Todo search is case-sensitive' \
-  --label bug --label lab-1 --label good-first-issue --body "$(cat <<'EOF'
+  --label bug --label lab-1 --label good-first-issue --body-file - <<'EOF'
 ## What happens
 Searching todos for `report` does not find "Draft Weekly Report for stakeholders"; searching `Report` misses "Collect report figures from analytics". Only exact-case matches are returned.
 
@@ -49,12 +49,11 @@ Searching todos for `report` does not find "Draft Weekly Report for stakeholders
 ## What should happen instead
 Search should be case-insensitive and cover both title and notes.
 EOF
-)"
 
 gh issue create --title 'Pagination total is wrong when results span pages' \
-  --label bug --label lab-1 --body "$(cat <<'EOF'
+  --label bug --label lab-1 --body-file - <<'EOF'
 ## What happens
-`GET /api/todos` returns `meta.total` equal to the number of items on the current page, not the number of matching todos. With the seed data (25 todos, page size 20), page 1 reports `total: 20` and page 2 reports `total: 5` — the pager in the filter bar shows "Page 1 of 1" and both pager math and the "(N todos)" count are wrong.
+`GET /api/todos` returns `meta.total` equal to the number of items on the current page, not the number of matching todos. With the seed data (25 todos, page size 20), page 1 reports `total: 20` and page 2 reports `total: 5` — so the pager in the filter bar shows "Page 1 of 1" and the "(N todos)" count is wrong.
 
 ## Steps to reproduce
 1. `npm run reset-db && npm run dev`
@@ -63,25 +62,23 @@ gh issue create --title 'Pagination total is wrong when results span pages' \
 ## What should happen instead
 `meta.total` should be the count of todos matching the filters, independent of pagination.
 EOF
-)"
 
 gh issue create --title 'Todos due today are flagged as overdue' \
-  --label bug --label lab-1 --label good-first-issue --body "$(cat <<'EOF'
+  --label bug --label lab-1 --label good-first-issue --body-file - <<'EOF'
 ## What happens
 A todo whose due date is today shows the red "Overdue" badge all day.
 
 ## Steps to reproduce
 1. `npm run dev`
-2. Create a todo with today's date as the due date.
+2. Create a todo due today (pick the current date in the due-date field).
 3. It immediately renders with the "Overdue" badge.
 
 ## What should happen instead
 A todo is overdue only once its due date is in the past; something due today is not overdue.
 EOF
-)"
 
 gh issue create --title 'Add a "Clear completed" action' \
-  --label feature --label lab-1 --body "$(cat <<'EOF'
+  --label feature --label lab-1 --body-file - <<'EOF'
 ## What and why
 Done todos pile up. Add a way to delete all completed todos in one action, optionally scoped to the currently selected list.
 
@@ -91,10 +88,9 @@ Done todos pile up. Add a way to delete all completed todos in one action, optio
 - [ ] A "Clear completed" button in the todo filter bar, with the count of affected todos
 - [ ] Server and client tests for the new behavior
 EOF
-)"
 
 gh issue create --title 'Support sorting todos by due date' \
-  --label feature --label lab-1 --body "$(cat <<'EOF'
+  --label feature --label lab-1 --body-file - <<'EOF'
 ## What and why
 `GET /api/todos` only supports `sort=createdAt`. Sorting by due date helps planning the day.
 
@@ -103,6 +99,5 @@ gh issue create --title 'Support sorting todos by due date' \
 - [ ] A sort selector in the todo filter bar
 - [ ] Tests covering the new sort, including todos with no due date
 EOF
-)"
 
 echo "Done. View them with: gh issue list"
