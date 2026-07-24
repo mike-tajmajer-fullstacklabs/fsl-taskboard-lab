@@ -12,14 +12,20 @@ issue backlog**. Treat it like you'd treat work code.
 ## Getting your copy
 
 1. Click **Use this template → Create a new repository** (public or private, your account).
-2. Clone your copy, then from the repo root:
+2. Clone your copy, then from the repo root run the setup script for your platform — it creates the training labels + backlog issues in YOUR repo:
 
 ```bash
-./scripts/setup-repo.sh   # creates the training labels + backlog issues in YOUR repo
+./scripts/setup-repo.sh      # macOS / Linux
+```
+
+```powershell
+.\scripts\setup-repo.ps1     # Windows (PowerShell)
 ```
 
 > Template copies don't inherit issues, so this script seeds your working
-> backlog. Add `--protect-main` to also require PRs with green CI on main.
+> backlog. Add `--protect-main` (bash) or `-ProtectMain` (PowerShell) to also
+> require PRs with green CI on main. Re-running is safe: issues that already
+> exist are skipped.
 
 ## Quickstart
 
@@ -86,8 +92,11 @@ project context file, worth reading on its own.
   proxy targets 3001, so change both if you move it.
 - **Node version errors:** `nvm use` (needs ≥ 20; Vite requires 20.19+).
 - **Weird data state:** `npm run reset-db` restores the seed.
-- **Windows:** use WSL or Git Bash for the shell scripts; the app itself runs
-  fine on any OS.
+- **Windows:** use the PowerShell scripts (`.\scripts\setup-repo.ps1`,
+  `.\scripts\seed-issues.ps1`) — they mirror the `.sh` versions. If your
+  execution policy blocks them, run
+  `powershell -ExecutionPolicy Bypass -File .\scripts\setup-repo.ps1`.
+  The app itself runs fine on any OS.
 
 ## License
 
