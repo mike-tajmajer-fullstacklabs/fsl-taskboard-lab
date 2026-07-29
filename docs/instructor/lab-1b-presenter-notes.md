@@ -12,7 +12,7 @@ Set expectations: mostly hands-on. I demo one bug (#5), you fix another (#4), we
 
 ## Slide 3 · Set up the training repo
 
-Do this before anything hands-on (~2 min). The green 'Use this template → Create a new repository' button (circled in the screenshot) makes their OWN copy — not Fork, not plain Clone. Then the setup script (`./scripts/setup-repo.sh`, or `.ps1` on Windows) seeds the lab labels + backlog issues, since template copies don't inherit issues — they'll need `gh auth login` first. Then `npm install` / `npm run reset-db` / `npm run dev` (Node 20+). Confirm `npm test` is green, then pick a `lab-1` issue. If anyone's stuck here, pair them before the demo.
+Do this before anything hands-on (~2 min). Repo: github.com/mike-tajmajer-fullstacklabs/fsl-taskboard-lab (shown top-left). The green 'Use this template → Create a new repository' button (circled in the screenshot) makes their OWN copy — not Fork, not plain Clone. Then the setup script (`./scripts/setup-repo.sh`, or `.ps1` on Windows) seeds the lab labels + backlog issues, since template copies don't inherit issues — they'll need `gh auth login` first. Then `npm install` / `npm run reset-db` / `npm run dev` (Node 20+). Confirm `npm test` is green, then pick a `lab-1` issue. If anyone's stuck here, pair them before the demo.
 
 ## Slide 4 · Recap Lab 1.a
 
