@@ -10,82 +10,90 @@ Welcome — this is **Lab 1.b**, the hands-on half of Lab 1. By the end you can 
 
 Set expectations: mostly hands-on. I demo one bug (#5), you fix another (#4), we review together, then a feature if time allows. Note the recap section now also covers HOW to prompt Claude. Keep us honest on timeboxes. ~2 min.
 
-## Slide 3 · Recap Lab 1.a
+## Slide 3 · Set up the training repo
+
+Do this before anything hands-on (~2 min). The green 'Use this template → Create a new repository' button (circled in the screenshot) makes their OWN copy — not Fork, not plain Clone. Then the setup script (`./scripts/setup-repo.sh`, or `.ps1` on Windows) seeds the lab labels + backlog issues, since template copies don't inherit issues — they'll need `gh auth login` first. Then `npm install` / `npm run reset-db` / `npm run dev` (Node 20+). Confirm `npm test` is green, then pick a `lab-1` issue. If anyone's stuck here, pair them before the demo.
+
+## Slide 4 · Recap Lab 1.a
 
 Quick recap only (~3 min). The taskboard repo already ships a CLAUDE.md, so context is done — we are NOT authoring one today. Confirm everyone can run `npm install`, `npm run reset-db`, `npm run dev`, and `npm test`. Pair up anyone whose environment is broken before we start.
 
-## Slide 4 · Why test-first
+## Slide 5 · Why test-first
 
 The core mindset (~3 min). 'A bug is a missing test' — the defect slipped through because no test pinned that behavior. Writing the test first makes the fix provable and permanent. For juniors: the failing test is how you and Claude agree on what 'done' means.
 
-## Slide 5 · The loop
+## Slide 6 · The loop
 
 The spine of the whole class — point back to it during the demo and the exercise. Reproduce → RED → Fix (Plan Mode) → GREEN → Ship. Same five steps for bugs AND features. ~2 min.
 
-## Slide 6 · Best practices
+## Slide 7 · Best practices
 
 How we work with Claude (~3 min). Key habit: paste the failing test into Claude and let CLAUDE.md carry conventions; use Plan Mode; READ the diff. Guardrail callout: `server/data/seed.json` is protected by a PreToolUse hook — a block there is expected, not an error.
 
-## Slide 7 · How to prompt (FSL pattern)
+## Slide 8 · RTCE = the FSL pattern
 
-The prompt-craft slide (~3 min). Four parts: Context (the files, @-referenced), Task (one ask), Constraints (guardrails — 'use makeTestDb', 'don't refactor'), Verify ('run npm test -w server'). The three habits do the heavy lifting: describe symptoms not solutions, @-reference real files, end with 'run the tests.' Same shape AE calls RTCE. Grounded in the Claude Code + Agentic Engineering courses.
+This is the 'they're the SAME pattern' slide — the one that clears up the confusion (~2 min). Read the table across, row by row: RTCE's Role tucks into Context; Task = Task; Context = Context; and RTCE's Expectations splits into the Claude Code course's Constraints + Verify (the highlighted row). It's ONE shape with two labelings — nobody needs to memorize two frameworks. Then make the SUPERIORITY point: the FSL grouping is better precisely because of that split — it promotes Verify to its own first-class step, so every prompt states HOW Claude proves it's done ('run the tests'), not just a vague 'Expectations'. Both courses call this the highest-leverage habit ('a prompt is a verification strategy'), and it's what makes a fix provable instead of hopeful. Close with where-it-lives: CLAUDE.md carries the durable Role + Context (versioned + shared), so each prompt only carries Task + Constraints + Verify — the standardization goal in prompt form.
 
-## Slide 8 · Same goal, four ways
+## Slide 9 · Three habits
 
-The key idea for juniors and seniors alike (~4 min): there is NO single magic prompt — the same goal has several good styles. Walk the four: explicit (spell it all out), symptom-first (describe what you see, let Claude diagnose the root cause), reference-driven (point at an existing test — 'do it like this'), plan-first (ask for the plan/diagnosis before any code). Encourage them to try a couple of styles when they fix Bug #4.
+The three habits that make the shape actually work (~2 min): describe symptoms not solutions (say what you see, let Claude diagnose the root cause), @-reference real files (show, don't describe), and end with 'run the tests' (Claude verifies itself). Each card has a taskboard-flavored example. Tell students these three are what separate a prompt that lands first-try from one that needs three rounds.
 
-## Slide 9 · Demo divider
+## Slide 10 · Same goal, four ways
+
+The key idea for juniors and seniors alike (~4 min): there is NO single magic prompt — the same goal has several good styles. Walk the four: explicit (spell it all out), symptom-first (describe what you see, let Claude diagnose), reference-driven (point at an existing test — 'do it like this'), plan-first (ask for the plan/diagnosis before any code). Encourage them to try a couple of styles when they fix Bug #4.
+
+## Slide 11 · Demo divider
 
 Transition. Tell them: watch the loop end-to-end. I'll switch between these slides and VS Code.
 
-## Slide 10 · Reproduce #5
+## Slide 12 · Reproduce #5
 
 Reproduce first (~4 min). Show the bug live in the running app: search 'FIRST' vs 'First'. Then open `server/src/services/todos.service.ts` → `list()` and show the `includes()` lines. Say the root cause out loud: `includes()` is case-sensitive and neither side is normalized.
 
-## Slide 11 · RED #5
+## Slide 13 · RED #5
 
 Write the failing test live in `todos.service.test.ts`, then `npm test -w server` → RED (~6 min). The two prompt variants on the slide (explicit / symptom-first) are starting points; the fuller set is on the 'four ways' slide. Talking point: 'First fixture todo' should match 'first' but won't today — that red test is our precise target.
 
-## Slide 12 · GREEN #5
+## Slide 14 · GREEN #5
 
 The fix (~6 min). In VS Code: enter Plan Mode, hand Claude the failing test, ask for the smallest fix (the two fix-prompt styles are on the slide: minimal vs Plan-Mode). Review the plan, apply, rerun → GREEN, then lint + typecheck. The fix is just lowercasing the query and the compared fields; reinforce reading the diff before accepting.
 
-## Slide 13 · Ship #5
+## Slide 15 · Ship #5
 
 Close the loop (~4 min): `git checkout -b fix/case-insensitive-search`, a Conventional Commit, PR 'Closes #5'. Show CI running; require a reviewer. The repo's PR template auto-populates the checklist.
 
-## Slide 14 · Your turn divider
+## Slide 16 · Your turn divider
 
 Hand off. Students now fix Bug #4 (solo or pairs), ~40 min. Circulate and coach. Do NOT reveal the root cause — the diagnosis is the exercise. Nudge them to try a different prompt style than I used.
 
-## Slide 15 · The task #4
+## Slide 17 · The task #4
 
 Brief them (~2 min), then let them work. INSTRUCTOR-ONLY root cause — do not say up front: `stats.service.ts` sets `COMPLETED_STATUS = 'completed'`, but the domain status is `'done'` (see `shared/src/types.ts` and `todosService.complete()`), so the filter never matches → always 0. Nudge them to reproduce and write a failing test before touching the fix.
 
-## Slide 16 · Hints #4
+## Slide 18 · Hints #4
 
 Point stuck students here; the starter scaffold and two no-spoiler prompt starters are on the slide (fuller set on the starter card). Gotcha to surface via questions (not answers): the fixture's completed todo (`todo_c`) is dated Jan 2026 — NOT 'this week' — so they must complete a todo *now* to expect a nonzero count. If a test passes immediately, the expectation is wrong. Acceptance: a test that failed first then passes; `npm test -w server` + lint + typecheck green; PR 'Closes #4' + a reviewer.
 
-## Slide 17 · Review
+## Slide 19 · Review
 
 ~20 min. Pull up 2–3 student diffs/PRs and use the prompts. Best moments: compare two different tests for the same bug, and whether Claude's first attempt passed review. Keep hammering 'the test failed first' as the discipline check.
 
-## Slide 18 · Feature divider
+## Slide 20 · Feature divider
 
 Only if time remains (~15 min). Transition: features use the same loop, but the starting point flips from 'reproduce a defect' to 'specify new behavior.'
 
-## Slide 19 · Bug vs feature
+## Slide 21 · Bug vs feature
 
 The one conceptual slide for features (~4 min). Bug = behavior exists but is wrong; the test reproduces then pins the correction. Feature = behavior doesn't exist; the test specifies it and fails until built. Same rhythm both ways: test-first → build with Claude → verify → PR.
 
-## Slide 20 · Feature example
+## Slide 22 · Feature example
 
 Concrete small feature: sort by due date. Two prompt starters on the slide (interview/plan-first vs explicit test-first). Teaching point: adding `sort: 'dueDate'` won't even typecheck until you extend `TodoQuery.sort` in `shared/src/types.ts` — the type/spec drives the change. Stretch goal; if time runs out they continue it in office hours / Slack. (The on-slide test sketch omits `page`/`pageSize` for space — the real call needs them.)
 
-## Slide 21 · Prompt starters card
+## Slide 23 · Prompt starters card
 
 Reference/screenshot slide — tell students to grab it. One starter per loop step; they swap in their own file paths. Reiterate the three habits (symptoms, @-reference, end with 'run the tests'). Little talking — point them here during the exercise.
 
-## Slide 22 · Wrap
+## Slide 24 · Wrap
 
 Land the takeaway (~5 min): the LOOP is the transferable skill, not any one bug. Walk the ship checklist. Point everyone to the #extra-duty-solutions-ai-training Slack channel to ask questions and share their PRs.
