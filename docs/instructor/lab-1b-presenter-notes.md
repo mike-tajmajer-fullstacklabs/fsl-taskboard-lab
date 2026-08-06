@@ -18,7 +18,6 @@ One-time install, ideally before lab day (~10 min). macOS column assumes Homebre
 
 Do this before anything hands-on (~2 min). Repo: github.com/mike-tajmajer-fullstacklabs/fsl-taskboard-lab (shown top-left). The green 'Use this template → Create a new repository' button (circled in the screenshot) makes their OWN copy — not Fork, not plain Clone. Then the setup script (`./scripts/setup-repo.sh`, or `.ps1` on Windows) seeds the lab labels + backlog issues, since template copies don't inherit issues — gh auth was handled on the tooling slide. Then `npm install` / `npm run reset-db` / `npm run dev` (Node LTS ≥ 20.19; `nvm use` reads .nvmrc). Confirm `npm test` is green, then pick a `lab-1` issue. If anyone's stuck here, pair them before the demo. Tooling itself was installed on the previous slide — this slide is only about the repo.
 
-
 ## Slide 5 · Recap Lab 1.a
 
 Quick recap only (~3 min). The taskboard repo already ships a CLAUDE.md, so context is done — we are NOT authoring one today. Confirm everyone can run `npm install`, `npm run reset-db`, `npm run dev`, and `npm test`. Pair up anyone whose environment is broken before we start.
@@ -77,7 +76,7 @@ Brief them (~2 min), then let them work. INSTRUCTOR-ONLY root cause — do not s
 
 ## Slide 19 · Hints #4
 
-Point stuck students here; the starter scaffold and two no-spoiler prompt starters are on the slide (fuller set on the starter card). Gotcha to surface via questions (not answers): the fixture's completed todo (`todo_c`) is dated Jan 2026 — NOT 'this week' — so they must complete a todo *now* to expect a nonzero count. If a test passes immediately, the expectation is wrong. Acceptance: a test that failed first then passes; `npm test -w server` + lint + typecheck green; PR 'Closes #4' + a reviewer.
+Point stuck students here; the starter scaffold and two no-spoiler prompt starters are on the slide (fuller set on the starter card). Gotcha to surface via questions (not answers): the fixture's completed todo (`todo_c`) is dated Jan 2026 — NOT 'this week' — so they must complete a todo _now_ to expect a nonzero count. If a test passes immediately, the expectation is wrong. Acceptance: a test that failed first then passes; `npm test -w server` + lint + typecheck green; PR 'Closes #4' + a reviewer.
 
 ## Slide 20 · Review
 
