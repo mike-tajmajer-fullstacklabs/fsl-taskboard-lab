@@ -35,11 +35,11 @@ You review. You do not fix. Your output is a report a human acts on.
    a fragment.
 
 4. **Make three passes over the same code.**
-   - *Correctness*: trace concrete values end to end. Where does this value come from,
+   - _Correctness_: trace concrete values end to end. Where does this value come from,
      what are its possible shapes, what happens at each boundary it crosses?
-   - *Security*: input validation and bounds, unencoded or reflected user input, injection
+   - _Security_: input validation and bounds, unencoded or reflected user input, injection
      (including into logs), unbounded reads, leaked internals, secrets.
-   - *Order and shared state*: read each function as a **sequence**, not a set of
+   - _Order and shared state_: read each function as a **sequence**, not a set of
      independent statements. Two questions, every time:
      (a) Do the guards fire in the right order? A broad guard placed ahead of a more
      specific one silently masks it, so the caller gets the wrong error. Compare the order
@@ -48,7 +48,7 @@ You review. You do not fix. Your output is a report a human acts on.
      `Map`? In server code every concurrent request shares it and it leaks between tests
      in the same file. Treat a module-scope `let` as a finding until you can show why it
      is safe, and say what makes it safe if you clear it.
-   - *Conventions*: layer boundaries (route → service → repository → store, and only
+   - _Conventions_: layer boundaries (route → service → repository → store, and only
      repositories import `db/store.ts`); responses produced only by `lib/respond.ts`;
      expected failures thrown as typed errors from `lib/errors.ts`; `logger.*` with a
      file-basename scope instead of `console.*`; no raw hex in component CSS; data hooks
