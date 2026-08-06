@@ -12,7 +12,7 @@ Set expectations: mostly hands-on. I demo one bug (#5), you fix another (#4), we
 
 ## Slide 3 · Install your tooling
 
-One-time install, ideally before lab day (~10 min). macOS column assumes Homebrew, Windows assumes winget (built into Win 10/11) — fallback for both is each tool’s download page. Why each tool: git drives the branch/PR flow; nvm makes `nvm use` match the repo’s .nvmrc; Node floor is LTS 20.19+ because Vite 7 requires it — 20, 22, or 24 LTS all work, odd majors (23) print engine warnings that confuse people; GitHub CLI powers the issue-seeding script and PR flow (`gh auth login` is the step people forget); Claude Code uses the native installer — self-updating and avoids npm -g permission problems on locked-down machines; any editor is fine, the demo narrates from VS Code. Accounts: a GitHub account plus an EDS-provisioned Claude Code seat — have everyone run the VERIFY line and complete a Claude login BEFORE lab day; pair anyone broken at the door rather than during the demo.
+One-time install, ideally before lab day (~10 min). macOS column assumes Homebrew, Windows assumes winget (built into Win 10/11) — fallback for both is each tool’s download page. Why each tool: git drives the branch/PR flow; nvm makes `nvm use` match the repo’s .nvmrc; Node floor is LTS 20.19+ because Vite 7 requires it — 20, 22, or 24 LTS all work, odd majors (23) print engine warnings that confuse people; GitHub CLI powers the issue-seeding script and PR flow (`gh auth login` is the step people forget); Claude Code uses the native installer — self-updating and avoids npm -g permission problems on locked-down machines; any editor is fine, the demo narrates from VS Code. Accounts: a GitHub account plus a company-provisioned Claude Code seat — have everyone run the VERIFY line and complete a Claude login BEFORE lab day; pair anyone broken at the door rather than during the demo.
 
 ## Slide 4 · Set up the training repo
 
@@ -101,4 +101,4 @@ Reference/screenshot slide — tell students to grab it. One starter per loop st
 
 ## Slide 25 · Wrap
 
-Land the takeaway (~5 min): the LOOP is the transferable skill, not any one bug. Walk the ship checklist. Point everyone to the #extra-duty-solutions-ai-training Slack channel to ask questions and share their PRs.
+Land the takeaway (~5 min): the LOOP is the transferable skill, not any one bug. Walk the ship checklist. Point everyone to the team's AI-training Slack channel — say the channel name out loud; it's on the cohort setup sheet, not in this public repo — to ask questions and share their PRs.
