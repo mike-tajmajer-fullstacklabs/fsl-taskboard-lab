@@ -11,6 +11,10 @@ Nothing here needs to be done in a lab. It's the independent follow-up; office h
 
 ## The shape: one rule, three layers
 
+_(Layer numbers refer to Lab 2.b's five-layer model: 1 instruction · 2 client-side · 3
+commit-time · 4 CI · 5 bypass. This card uses 1, 2, and 4 — commit-time hooks are skipped, and
+the bypass appears inside layer 2's check.)_
+
 Take a rule you already have. _"Stored procedures use parameters — never build executable SQL by
 concatenating strings."_ Most teams have said this out loud. Very few can tell you when it was
 last violated.
@@ -74,6 +78,7 @@ process.stdin.on('end', () => {
 The hook stops the agent. This stops anyone:
 
 ```yaml
+# in YOUR repo's CI — lint-sql.mjs is a script you write (~50 lines; it doesn't exist here)
 - name: SQL conventions
   run: node scripts/lint-sql.mjs # same rule module the hook imports
 ```
@@ -102,7 +107,9 @@ fires on real work, someone disables hooks, and you've lost the layer entirely.
 
 ## Which clauses can a gate actually decide?
 
-Write your rule out and sort it before you write any code. This is the whole exercise.
+Write your rule out and sort it before you write any code. This is the whole exercise — and this
+table **is** the marking convention Lab 2.a's NFR asks for, with its three verdicts: mechanical,
+partly (heuristic), and human-review.
 
 | Candidate clause                                               | Mechanical?                                    |
 | -------------------------------------------------------------- | ---------------------------------------------- |

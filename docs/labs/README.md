@@ -2,16 +2,16 @@
 
 Student-facing material for the Lab 2 blocks. Read the handout for the block you're in.
 
-| Block   | Handout                                                      | You'll produce                                                   |
-| ------- | ------------------------------------------------------------ | ---------------------------------------------------------------- |
-| **2.a** | [Writing the Standards Down](lab-2a-handout.md)              | An ADR, an NFR, both wired into CLAUDE.md                        |
-| **2.b** | [Guardrails, and Making Standards Travel](lab-2b-handout.md) | A verified guardrail, a documented bypass, a decision per clause |
+| Block   | Handout                                                      | You'll produce                                                                                                                                                             |
+| ------- | ------------------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **2.a** | [Writing the Standards Down](lab-2a-handout.md)              | An ADR + an NFR (unenforceable clauses marked), wired into CLAUDE.md, PR-reviewed                                                                                          |
+| **2.b** | [Guardrails, and Making Standards Travel](lab-2b-handout.md) | A verified hook + CI gate, a documented bypass, a decision per clause — plus the "how we use these" README, a distribution decision with an owner, and a named port target |
 
-Snippets to paste into your own copy live in [`snippets/`](snippets/):
+Snippets to copy into your own repo live in [`snippets/`](snippets/) — one of them (2.b's settings block) must be **merged** into an existing file, never pasted over it:
 
 | File                  | Used in | What it is                                                                   |
 | --------------------- | ------- | ---------------------------------------------------------------------------- |
-| `hook-skeleton.js`    | 2.b     | Hook plumbing — block and nudge shapes, one throwaway rule. Replace the rule |
+| `hook-skeleton.js`    | 2.b     | Hook plumbing — block and nudge shapes, two throwaway rules. Replace them    |
 | `governance-gate.yml` | 2.b     | CI gate plumbing, including the `fetch-depth: 0` gotcha                      |
 | `seed-lab2-issues.sh` | 2.a     | Optional — seeds the Lab 2 backlog into your copy so `Closes #N` still works |
 
@@ -27,9 +27,11 @@ Copy-paste from GitHub's raw view works. Or pull the whole folder:
 npx giget gh:mike-tajmajer-fullstacklabs/fsl-taskboard-lab/docs/labs docs/labs
 ```
 
-That is not incidental — it's the first two rungs of the distribution ladder Lab 2.b ends on. One
-canonical repo plus a pointer is _crawl_; pulling a pinned copy on demand is _walk_. You're using
-the thing you're about to be taught.
+That is not incidental — Lab 2.b ends on a ladder of ways a standard reaches every repo, and you
+just used the bottom of it. One canonical repo plus a pointer is the rung 2.b calls _crawl_;
+pulling a copy on demand is most of the next rung, _walk_ — the missing half is the **pin**, a
+version tag that would let you tell whether your copy is current (this repo doesn't carry tags
+yet). You're using the thing you're about to be taught.
 
 ## Also worth reading
 

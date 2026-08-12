@@ -6,10 +6,11 @@
 # Your copy was created before these issues existed, and template copies do
 # not inherit later changes — hence this script rather than a repo update.
 #
-# Usage, from your repo root:
-#   curl -fsSL https://raw.githubusercontent.com/mike-tajmajer-fullstacklabs/fsl-taskboard-lab/main/docs/labs/snippets/seed-lab2-issues.sh | bash
-# or, if you already pulled docs/labs:
+# Usage, from your repo root (pull the folder first, then run — we do NOT
+# suggest `curl | bash` here: it's on the deny list this very lab teaches):
+#   npx giget gh:mike-tajmajer-fullstacklabs/fsl-taskboard-lab/docs/labs docs/labs
 #   bash docs/labs/snippets/seed-lab2-issues.sh
+# Windows: run it in Git Bash (ships with Git for Windows).
 #
 # Idempotent: labels are upserted and issues whose titles already exist are skipped.
 set -euo pipefail

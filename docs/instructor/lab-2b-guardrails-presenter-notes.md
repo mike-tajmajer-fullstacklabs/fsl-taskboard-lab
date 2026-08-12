@@ -1,98 +1,106 @@
-# Lab 2.b — Guardrails · Presenter Notes
+# Lab 2.b — Guardrails, and Making Standards Travel · Presenter Notes
 
 Speaker notes for `lab-2b-guardrails.pptx` (the same text is attached to each slide's Notes pane).
 
-> Slides marked **[PROVISIONAL]** depend on the Lab 1.b room feedback — pacing, the
-> stimulus diffs, and the derivation scaffolding. Everything else is settled.
+> **Calibrated against the Lab 1.b room feedback (2026-08-12).** Slides whose notes open
+> with **[CALIBRATED…]** carry the specific adjustment; nothing remains provisional.
 
-## Slide 1 · Guardrails
+## Slide 1 · Guardrails, and Making Standards Travel
 
-Welcome to 2.b. Last week you wrote standards. Today you find out which parts of them a machine can actually hold, and what to do about the rest. Open with the honest framing: the interesting output of today is not the hook — it is the list of things the hook could not check. ~1 min.
+Welcome to 2.b. The challenge in one breath: take the rule your group wrote last week and give it teeth — a hook that stops the agent while it writes, and a CI gate that stops anyone at merge time, both verified in both directions, with the unenforceable clauses honestly decided rather than quietly dropped. The interesting output today is not the hook — it is the list of things the hook could not check. ~1 min.
 
 ## Slide 2 · Two hours, hands-on _(Today)_
 
-**[PROVISIONAL]** This block has genuine slack because the distribution discussion moved out. Protect the verify-both-directions step — it is the one people skip and the one that separates a guardrail from a belief. ~2 min.
+[CALIBRATED from Lab 1.b, 2026-08-12: agenda held · checkpoint gates worked · keep as built] The slack is real this time; protect it for verification, which is the step people skip. Prereq check right now, out loud: Lab 2.a done (ADR + NFR wired in), and the Hooks lesson done — anyone missing either pairs up for the build sections and catches up async per the handout. Assessment disclosure: same rubric, and today's hook or gate is also the Framework Practitioner artifact. ~2 min.
 
 ## Slide 3 · Where 2.a left us _(Recap)_
 
-Fast. The only new idea on this slide is the last bullet, and it is the premise of the whole block. Do not re-teach 2.a. ~3 min.
+Fast. The only new idea is the last bullet — the premise of the block. Today REVISITS the 2.a NFR: the residue decisions recorded this session update that same document, not a new one. ~2 min.
 
 ## Slide 4 · The model layer cannot be the control. _(The Premise)_
 
-This is the industry consensus, not our opinion — say so. The phrase worth landing is "model-independent governance": the check survives a model upgrade. Connect it to their own complaints from the interviews about the agent being a yes-man and ignoring stated patterns — that is exactly the failure mode this addresses. ~4 min.
+Industry consensus, not our opinion — say so. The phrase to land: "model-independent governance." Connect to their own interview complaints about the agent being a yes-man and ignoring stated patterns — this is the failure mode it addresses. ~3 min.
 
 ## Slide 5 · Five layers of enforcement _(The Map)_
 
-The honesty about the repo having only two layers matters — it models the behaviour we want from them. A governance doc that overstates its own coverage is the failure mode. Note that layer 5 is not a gap in the others, it is what makes them credible. ~4 min.
+The honesty about this repo matters — it models the behaviour we want. Note the build framing precisely: layers 1–2 plus one layer-4 gate; a governance doc that overstates its own coverage is the failure mode. Layer 5 is not a gap in the others — it is what makes them credible. ~4 min.
 
 ## Slide 6 · The five-minute guardrail _(Warm-Up)_
 
-Everyone does this together, right now, five minutes. This is the honest answer to "there are no restore points" and "it did something I did not expect" from their interviews — the cheapest guardrail with the largest payoff, and it works in every repo they own tomorrow. Watch for people pasting over the file and destroying the seed rules; call it out before they start. ~5 min.
+Everyone, together, five minutes. This is the honest answer to "no restore points" and "it did something I did not expect" — the cheapest guardrail with the largest payoff, in every repo they own tomorrow. Teach ask-vs-deny while they type: deny the unrecoverable, ask the annoying — if everything asks, people stop reading, which is prompt fatigue and it kills the layer. Watch for pasting over the file; the handout has the before-state and names settings.local.json. ~5 min.
 
-## Slide 7 · Why three verdicts and not two _(Layer 2)_
+## Slide 7 · The hook already in your repo _(Layer 2)_
 
-The prompt-fatigue point is the insight here. A permission scheme that asks about everything trains people to approve without reading, which is worse than a narrower scheme they actually attend to. ~3 min.
+The message structure is the teaching point: BLOCKED / Why / Instead / Done means. A guardrail that only says no makes the agent guess, and it guesses creatively. Four lines turn a refusal into a redirection. ~3 min.
 
-## Slide 8 · The hook already in your repo _(Layer 2)_
+## Slide 8 · Block or nudge? Decide, do not default _(Severity)_
 
-The message structure is the teaching point: BLOCKED / Why / Instead / Done means. A guardrail that only says "no" makes the agent guess, and it will guess wrong in a creative direction. Four lines turn a refusal into a redirection. ~4 min.
+New material for most of the room. The nudge shape (PostToolUse + exit 2) is genuinely useful and almost nobody knows it: the edit lands, and Claude is told to fix it. Name the taxonomy refinement explicitly — mechanical, PARTLY, fuzzy — because their 2.a lists were binary and the middle bucket is where their hook will live. ~3 min.
 
-## Slide 9 · Block or nudge? Decide, do not default _(Severity)_
+## Slide 9 · An unverified guardrail is a belief _(Verification)_
 
-New material for most of the room. The nudge shape (PostToolUse + exit 2) is genuinely useful and almost nobody knows it exists: the edit lands, and Claude is told to fix it. Emphasise the footnote — over-blocking is how the whole layer gets disabled. ~4 min.
+Insist on this in the exercise. The usual death of a guardrail is not failing to block — it is blocking something legitimate on day three, getting disabled, and taking the layer with it. The evidence standard matters: a claim without the refusal text is not verified. ~2 min.
 
-## Slide 10 · An unverified guardrail is a belief _(Verification)_
+## Slide 10 · The bypass you write down _(Layer 5)_
 
-Insist on this in the exercise. The most common outcome of an unverified guardrail is not that it fails to block — it is that it blocks something legitimate on day three, gets disabled, and takes the whole layer with it. ~3 min.
+The most senior idea in the block. The bypass rate is a signal about the RULE, not about discipline — if people constantly go around it, the rule is mis-scoped. That reframe lands well with leads. ~2 min.
 
-## Slide 11 · The bypass you write down _(Layer 5)_
+## Slide 11 · Taught today, built at scale _(Layers 3–5)_
 
-This is the most senior idea in the block and it is worth the time. The bypass rate is a signal about the RULE, not about discipline — if people are constantly going around it, the rule is mis-scoped. That reframe usually lands well with leads. ~3 min.
+Sanitised exemplar — no client, product, or domain detail; if asked, "another engagement." The proportion is the insight: nine validators sounds heavy until you see the bypass is a single comment convention. ~2 min.
 
-## Slide 12 · What we are teaching but not building today _(Layers 3–5)_
+## Slide 12 · Rules about AI are just rules. _(The Meta-Case)_
 
-Sanitised exemplar — no client, product, or domain detail; if asked, "another engagement." The useful contrast is proportion: nine validators sounds like a lot until you notice their bypass mechanism is a single comment convention. Governance is not volume. ~3 min.
+Ninety seconds; it collapses a distinction people assume exists. If the room heads toward "we need an AI policy", the answer is: you need an NFR, and you wrote one last week. ~2 min.
 
-## Slide 13 · Rules about AI are just rules. _(The Meta-Case)_
+## Slide 13 · Demo — build along, one guardrail
 
-Worth 90 seconds because it collapses a distinction people assume exists. If the room is heading toward "we need an AI policy", this is the answer: you need an NFR, and you already wrote one last week. ~2 min.
+Transition. Two instructions: build along in your own copy as I go, and watch where the time goes — I will spend more time verifying than writing.
 
-## Slide 14 · Demo — one guardrail, end to end
+## Slide 14 · Read-only database unless approved _(Demo · The Rule)_
 
-Transition. Tell them what to watch for: I will spend more time verifying than writing.
+Deliberately parallel to the exhibit they just read — the shape is the point, not this rule. Make the two-rules distinction out loud; the review agent flagged it as the most likely novice confusion of the block. ~4 min.
 
-## Slide 15 · Read-only database unless approved _(Demo · The Rule)_
+## Slide 15 · Twenty lines, no dependencies _(Demo · The Check)_
 
-Deliberately parallel to the exhibit they just read — the point is that the shape is reusable, not that this rule is important. Keep the code minimal; the interesting slides are the next two. ~5 min.
+Type it live if the room is comfortable; paste if behind. Say the Windows path normalisation out loud — it is the bug every group hits and why the hook is Node, not shell. Then register it together and restart sessions — the forgotten-restart is the "my hook never fires" stuck point. ~6 min.
 
-## Slide 16 · Twenty lines, no dependencies _(Demo · The Check)_
+## Slide 16 · Both directions, then the bypass _(Demo · Verify)_
 
-Type it live if the room is comfortable; paste if you are behind. The one thing to say out loud is the Windows path normalisation — it is the bug every group will hit and the reason the hook is Node rather than a shell script. ~8 min.
+Slow down here and say why: this is the step people skip. Both tests visibly. If your own hook false-positives live, that is a gift — work it through in front of them. ~6 min.
 
-## Slide 17 · Both directions, then the bypass _(Demo · Verify)_
+## Slide 17 · Checkpoint 1 _(Checkpoint)_
 
-Slow down here deliberately, and say why you are slowing down: this is the step people skip. Do both tests visibly. If your own hook has a false positive live, that is a gift — work it through in front of them. ~7 min.
+[CALIBRATED from Lab 1.b, 2026-08-12: agenda held · checkpoint gates worked · keep as built] Walk the room — this is a build-along, so everyone should be at this state, not just the instructor. Common failure: a path check that also catches db.json.example or a test fixture. Fast finishers: read protect-seed.js and diff the two hooks' messages. ~3 min.
 
-## Slide 18 · Checkpoint _(Checkpoint)_
+## Slide 18 · The same pattern, somewhere you will recognise _(Your Stack)_
 
-**[PROVISIONAL]** Walk the room. The common failure is a path check that also catches db.json.example or a test fixture. Two minutes of checking here saves the exercise. ~3 min.
+Three minutes, no hands-on. Why it is here: their real world is SQL Server and stored procedures, and the pattern they just built on a JSON file needs to visibly transfer. The false-positive row is the most valuable one — it is the PARTLY tag from the severity slide, in the wild. ~3 min.
 
-## Slide 19 · The same pattern, somewhere you will recognise _(Your Stack)_
+## Slide 19 · The hook — enforce what you wrote _(Your Clause · 1 Of 3)_
 
-Four minutes, no hands-on. The reason it is here: their real world is SQL Server and stored procs, and the pattern they just watched on a JSON file needs to visibly transfer. The false-positive row is the most valuable one — do not skip it to save time. ~4 min.
+[CALIBRATED from Lab 1.b, 2026-08-12: agenda held · checkpoint gates worked · keep as built] Circulate with one question: "what does your allow case replay?" If they have no answer, they are about to skip verification. Groups whose clause is store-boundary build the import check; test-discipline groups build the sibling-test nudge. ~15 min.
 
-## Slide 20 · Enforce the clause you wrote last week _(Your Turn)_
+## Slide 20 · Checkpoint 2 _(Checkpoint)_
 
-**[PROVISIONAL]** Thirty-five minutes. Circulate with one question: "what happens on a docs-only PR?" That is where the block-vs-nudge decision becomes real. Remind them the residue decision is an acceptance criterion, not an optional extra — "the test must have failed first" needs a named owner or an explicit drop. ~35 min.
+[CALIBRATED from Lab 1.b, 2026-08-12: agenda held · checkpoint gates worked · keep as built] Gate hard here: the CI-gate step depends on the clause being genuinely mechanical, which this checkpoint proves. Fast finishers: start the policy-bundle stretch or help a neighbour's allow case. ~2 min.
 
-## Slide 21 · Let us compare _(Review)_
+## Slide 21 · The same clause at merge time _(Your Clause · 2 Of 3)_
 
-Push hardest on the residue question — it is the one that reveals whether the lesson landed. A group with an empty residue column either has a trivial rule or has not looked hard enough. ~15 min.
+[CALIBRATED from Lab 1.b, 2026-08-12: agenda held · checkpoint gates worked · keep as built] The docs-only-PR question is where block-vs-warn becomes real — do not answer it for them. Residue is an acceptance criterion, not an optional extra: "the test must have failed first" needs a named owner or an explicit drop. ~10 min.
 
-## Slide 22 · One artifact left, and it is yours _(Hand-Off)_
+## Slide 22 · Point the reviewer at your standards _(Your Clause · 3 Of 3)_
 
-Three minutes, and the framing matters more than the content. The guide (docs/best-practices/distributing-standards.md) is written for a team new to governance — it opens with the four terms on this slide, Crawl is a checklist one person can finish in an afternoon, and every tool option carries its trap named (semble needs --content docs; gh search code returns silent empty results). Callback: this handout reached you as one canonical repo plus a pointer — giget if you ran it — so the room has already used Crawl and Walk today without deciding anything. The third rung needs a decision. What "done" looks like: the template on the right, filled in — a rung, a first move, and an owner who is a person rather than a committee. The two fields people skip are Owner and Not-doing-yet, and they are the two that matter. "We will decide later" is the only answer that costs more than acting. ~3 min.
+Short and satisfying: the reviewer quoting their own NFR back at them is the moment governance stops being paperwork. The giget fallback matters — copies made before Jul 29 lack the agents folder. ~4 min.
 
-## Slide 23 · What leaves this room _(Wrap)_
+## Slide 23 · Let us compare _(Review)_
 
-Close on the deny/ask list, not the hook — it is the thing every single person can apply tomorrow regardless of how far they got today. Then the three continuations, with office hours named as the place for the first one: bring the repo, not a question. ~5 min.
+Push hardest on the residue question — it reveals whether the lesson landed. A group with an empty residue column has either a trivial rule or has not looked. ~10 min.
+
+## Slide 24 · The sixth artifact, and it is yours _(Hand-Off)_
+
+Three minutes; framing over content. The guide is written for a team new to governance — it opens with the four terms, Crawl is one person's afternoon, and every tool option carries its trap named. Callback: this handout reached you as one canonical repo plus a pointer — crawl — and giget if you ran it, most of walk. Done = the template filled: rung, FIRST MOVE, and an owner who is a person. The two fields people skip are Owner and Not-doing-yet, and they are the two that matter. "We will decide later" is the only answer that costs more than acting. ~3 min.
+
+## Slide 25 · What leaves this room _(Wrap & Retro)_
+
+[CALIBRATED from Lab 1.b, 2026-08-12: agenda held · checkpoint gates worked · keep as built] Close on the deny/ask list — the thing every person applies tomorrow regardless of how far they got. Read the ship checklist as one list; it mirrors the handout exactly. INSTRUCTOR, within 24h: file the lab-capture entry (AI-Transformation-Playbook/04-labs/lab-capture-template.md) — outcomes, stuck points, timings, Format B observations. ~5 min.

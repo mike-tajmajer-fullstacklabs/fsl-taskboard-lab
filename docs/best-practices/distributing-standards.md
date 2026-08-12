@@ -41,8 +41,10 @@ One person's afternoon, no tooling, and you are better off than today:
 
 1. Create a repo called `sdlc-governance` with four folders: `adr/`, `nfr/`, `best-practices/`,
    `templates/`.
-2. Move (don't copy) the standards you already have into it — the Lab 2 ADR and NFR are exactly
-   the right seed content.
+2. Seed it by **promoting** your best existing standards — the Lab 2 NFR is exactly right. The
+   governance repo becomes the authoritative home; the project repo keeps a **pointer** (its
+   CLAUDE.md trigger row now aims at the governance copy). One home per fact, and nothing the labs
+   wired up breaks.
 3. In every project's `CLAUDE.md`, add two lines: where the governance repo is, and "before doing
    X, read Y" for the rules that matter most.
 4. Name the owner and fill in the template at the end of this document.
@@ -77,7 +79,8 @@ It is a **retrieval layer for coding agents**, not a developer-facing grep repla
   modes, so "the rule about logging" finds the right document even when that document never uses the
   word "rule". Index builds on first run, caches, and invalidates itself when files change.
 - **`find-related`** — similarity search from a known `file:line`.
-- **`semble install`** — wires itself into your coding agents as an MCP server, as instructions in
+- **`semble install`** — wires itself into your coding agents as an MCP server (MCP is the
+  protocol agents use to call external tools), as instructions in
   the agent's context file, and as a subagent.
 - **`semble savings`** — reports tokens saved versus having the agent read files directly. That is
   the actual pitch: an agent that searches instead of reading burns far less context.
@@ -147,6 +150,7 @@ tooling, and they work offline. The moment you copy them, drift becomes possible
 carry a **pin**: a record of which version it is, checkable by a script.
 
 ```json
+// package.json in YOUR project repo — the tools/ script is yours to write (~20 lines)
 "scripts": {
   "gov:sync": "giget gh:<org>/sdlc-governance/docs#v1.4.0 docs/governance --force",
   "gov:check": "node tools/check-governance-version.mjs"
@@ -170,12 +174,12 @@ Everything so far distributes documents, and documents only inform. The Run rung
 start being **enforced** — and where the tooling starts needing an owner. Four independent moves;
 adopt them one at a time, in any order, as the need appears:
 
-| Move                              | Mechanism                                                                                                                                                                                                                                                                                 |
-| --------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Guardrails become versioned       | A **Claude Code plugin from a private marketplace** — the only mechanism that versions the _enforcement_ layer rather than the documents. See the advanced subsection below                                                                                                               |
-| Docs get identity and enumeration | A small **docs MCP server** — a local service your coding agent queries for search / get-by-id / list (MCP is the protocol agents use to call tools). Committed in `.mcp.json`, so every teammate gets it automatically. Graduate here when you need "give me ADR-0042" deterministically |
-| Rules become gates                | CI checks for the mechanically checkable clauses; a documented bypass for the rest                                                                                                                                                                                                        |
-| New repos start compliant         | A **template repo** with the hooks, CI gates, and docs already wired in — so a new project starts compliant instead of retrofitting. (This training repo is itself one)                                                                                                                   |
+| Move                              | Mechanism                                                                                                                                                                                                                                  |
+| --------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Guardrails become versioned       | A **Claude Code plugin from a private marketplace** — the only mechanism that versions the _enforcement_ layer rather than the documents. See the advanced subsection below                                                                |
+| Docs get identity and enumeration | A small **docs MCP server** — a local service your coding agent queries for search / get-by-id / list. Committed in `.mcp.json`, so every teammate gets it automatically. Graduate here when you need "give me ADR-0042" deterministically |
+| Rules become gates                | CI checks for the mechanically checkable clauses; a documented bypass for the rest                                                                                                                                                         |
+| New repos start compliant         | A **template repo** with the hooks, CI gates, and docs already wired in — so a new project starts compliant instead of retrofitting. (This training repo is itself one)                                                                    |
 
 ### Advanced — ship the enforcement layer as a Claude Code plugin
 
@@ -273,7 +277,7 @@ change arrives reviewable, at the cost of a PR to review in each repo, each time
 1. **A pre-commit hook verifies the pin; it never fetches.** Network access on every commit breaks
    offline work and mutates the tree mid-commit. Pull explicitly, or on install.
 2. **Whatever you can't enforce, you write down — including who accepted the risk.** Same discipline
-   as the residue column in an NFR.
+   as the marked unenforceable clauses in an NFR (Lab 2.a's marking convention).
 
 ---
 
