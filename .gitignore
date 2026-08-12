@@ -8,3 +8,6 @@ coverage/
 # Runtime database — generated from server/data/seed.json via `npm run reset-db`
 server/data/db.json
 
+# Deck build tooling — regenerates the instructor decks, not part of the lab
+docs/instructor/build/
+

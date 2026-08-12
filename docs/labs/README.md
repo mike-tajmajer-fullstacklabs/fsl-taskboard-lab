@@ -34,3 +34,4 @@ the thing you're about to be taught.
 ## Also worth reading
 
 - [`../best-practices/enforcing-a-convention.md`](../best-practices/enforcing-a-convention.md) — takeaway card for applying the guardrail pattern in your own codebase, on your own conventions. Independent follow-up, supported in office hours.
+- [`../best-practices/distributing-standards.md`](../best-practices/distributing-standards.md) — the Collective-layer artifact your team defines: how a standard reaches every repo, and how you know you're current. Options, trade-offs, and a template for recording the decision. Handed over at the end of Lab 2.b.

@@ -180,36 +180,42 @@ lab exercise and a standard your team actually has.
 | The CI gate fails on a docs-only PR            | Expected. Now decide: path filter, warn instead of fail, or accept it. That decision is the deliverable                           |
 | `git diff` fails in CI with "unknown revision" | `fetch-depth: 0` on the checkout step                                                                                             |
 
-## Last topic: how does a standard reach every repo?
+## The artifact your team still owes
 
-You have one governance artifact in one repo. You have more than one repo, and none of them
-have any of this today. We'll work through it as a group — crawl, walk, run:
+You have one governance artifact in one repo. You have more than one repo, and none of them have
+any of this today.
 
-|           | Move                                                                                                                                                                                                                                                                | Cost    | What it can't do                                                    |
-| --------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------- | ------------------------------------------------------------------- |
-| **Crawl** | One `sdlc-governance` repo. Two lines in each project's CLAUDE.md: where it lives, and "before X, read Y"                                                                                                                                                           | ~30 min | Nothing is local, nothing enforced, nobody knows if they're current |
-| **Walk**  | Make it **queryable** — `semble search "<rule>" <governance-repo-url> --content docs` — and **pinnable** — pull a tagged copy, write the tag to a `VERSION` file, have a pre-commit hook _verify_ the pin                                                           | 1–2 hrs | Still no enforcement; N copies to keep in step                      |
-| **Run**   | Guardrails ship as a **versioned Claude Code plugin** from a private marketplace, so a new deny rule reaches everyone on their next session. Docs get served rather than copied. CI gates enforce the mechanical clauses. New repos start from a compliant template | ~days   | Needs someone to own it                                             |
+**How a standard reaches every repo, and how anyone knows they're current, is itself a governance
+artifact** — and it's the one we're deliberately not handing you. It sits at the **Collective**
+layer, above any single project, next to the ADR / NFR / recipe / rules file that live inside one.
 
-Note how you received _this_ handout: one canonical repo, a pointer, and a copy-paste — or
-`giget`, if you used it. That's crawl and walk, and you just ran them.
+Why it's yours: choosing the mechanism, the starting rung, and the owner _is_ the roll-up to a
+Collective Brain. A team that receives its distribution model has been handed a standard rather
+than adopting one.
 
-Two rules that hold at every rung: **a pre-commit hook verifies the pin, it never fetches**
-(network on every commit breaks offline work and mutates the tree mid-commit), and **whatever
-you can't enforce, you write down** — including who accepted the risk.
+Notice you already used the first two rungs today. **This handout** reached you as one canonical
+repo plus a pointer — that's _crawl_ — and if you ran the `giget` command, that's _walk_. Neither
+took a decision from anyone in this room; the third rung will.
 
-**The discussion has to end in a decision.** Not a preference — a rung, a first move, and a
-person. Crawl is roughly thirty minutes of one person's afternoon, so "we'll decide later"
-is the only answer that costs more than doing it. A rung with no owner is a rung nobody is on.
+[`distributing-standards.md`](../best-practices/distributing-standards.md) has the options in
+full — crawl (~30 min), walk (1–2 hrs), run (~days) — with an honest trade-off table and a
+template for recording what you choose.
+
+**What "done" looks like:** a recorded decision naming the **rung**, the **first move**, and an
+**owner who is a person, not a committee.** Crawl is about thirty minutes of one person's
+afternoon, so "we'll decide later" is the only answer that costs more than acting. A rung with no
+owner is a rung nobody is on.
 
 ## Where this goes next
 
-Two things leave this room and continue outside it:
+Three things leave this room and continue outside it:
 
 - **Port one artifact to a real repo.** Pick the smallest thing that transfers — usually the
   deny/ask list, sometimes an NFR — and land it in a repo you actually ship from. Office hours
   is for this; bring the repo, not a question. This is the step that decides whether Lab 2
   produced a standard or a training exercise.
+- **Define how standards travel** — the artifact above. Owner named, decision recorded, tracked in
+  the weekly status. Office hours and the champions track support it.
 - **Apply the pattern to a convention that's yours.**
   [`enforcing-a-convention.md`](../best-practices/enforcing-a-convention.md) is the takeaway
   card — it works the whole shape through on stored procedures, including the false positives

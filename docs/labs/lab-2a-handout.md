@@ -4,6 +4,11 @@
 **Duration:** ~2 hours, facilitated.
 **Surface:** your own copy of this repo.
 
+**The challenge.** This repo has a real, load-bearing rule that nothing explains and nothing
+checks. Document the _why_ as an ADR (Architecture Decision Record), derive a rule from last
+week's real fixes and write it up as an NFR (Non-Functional Requirement), and wire both into
+CLAUDE.md so Claude actually reads them.
+
 ---
 
 ## Why this block exists
@@ -20,32 +25,41 @@ that **LLM-generated context files made task success slightly worse** than provi
 all (about −3%), while raising cost by more than 20%. Human-written files improved success (about
 +4%). Running `/init` and walking away is worse than doing nothing. You will use Claude to draft —
 from evidence in the code — and you will own the decisions.
+_(Study summary: ["CLAUDE.md vs AGENTS.md vs SKILL.md (2026)"](https://pub.towardsai.net/claude-md-vs-agents-md-vs-skill-md-which-file-owns-what-in-2026-13859378f56a) — ask in Slack for the paper link.)_
 
 ## Before the session
 
 - [ ] Your copy of this repo runs: `npm install`, `npm run reset-db`, `npm run dev`, `npm test` green
 - [ ] Your Lab 1.b PR link handy — we're going to look at real fixes from last week, possibly yours
 - [ ] Skim `docs/adr/0001-shared-api-response-envelope.md` and `docs/nfr/0001-external-api-error-handling.md` — one worked example of each form ships in this repo
-- [ ] Optional, keeps the `Closes #N` habit from Lab 1: seed the Lab 2 backlog into your copy
-
-```bash
-bash docs/labs/snippets/seed-lab2-issues.sh
-```
-
-> Your copy was made from the template before these lab materials existed, and template
-> copies don't inherit later changes. That is why things arrive as snippets you paste rather
-> than files already in your repo — and it's a preview of Lab 2.b's last topic: how a standard
-> travels to repos that already exist.
-
-To pull this whole folder into your copy instead of copying files one at a time:
+- [ ] Pull the lab materials into your copy (they didn't exist when your copy was created):
 
 ```bash
 npx giget gh:mike-tajmajer-fullstacklabs/fsl-taskboard-lab/docs/labs docs/labs
 ```
 
+- [ ] Optional, keeps the `Closes #N` habit from Lab 1 — seed the Lab 2 backlog into your copy
+      (Windows: run it in **Git Bash**, which ships with Git for Windows):
+
+```bash
+bash docs/labs/snippets/seed-lab2-issues.sh
+```
+
+> Why the pull is needed: your copy was made from the template before these lab materials
+> existed, and template copies don't inherit later changes. That is why things arrive as
+> snippets you copy in rather than files already in your repo — and it's a preview of Lab 2.b's
+> last topic: how a standard travels to repos that already exist. (One snippet — 2.b's settings
+> block — must be **merged** into an existing file, never pasted over it; the handout says so
+> loudly when you get there.)
+
 ## The five artifact types
 
-Each one answers a **different question**. That's the cleanest way to keep them apart — if you
+Two acronyms first, since everything below leans on them: an **ADR** is an _Architecture
+Decision Record_ — one decision, written down with its reasons and costs. An **NFR** is a
+_Non-Functional Requirement_ — a rule about _how_ the system must behave (logging, safety,
+error handling) rather than _what_ it does.
+
+Each artifact answers a **different question**. That's the cleanest way to keep them apart — if you
 can name the question, you know which document you're writing.
 
 | Artifact                          | The question it answers                              | What it is                       |
@@ -61,13 +75,13 @@ can name the question, you know which document you're writing.
 This repo has a real rule: **only `server/src/repositories/` may import `db/store.ts`.** Here is
 what each artifact says about that same subject — and notice that none of them is redundant:
 
-| Artifact          | What it says about the boundary                                                                 |
-| ----------------- | ----------------------------------------------------------------------------------------------- |
-| **CLAUDE.md**     | One line, no rationale: `Don't: access db.json outside server/src/repositories/`. Always loaded |
-| **ADR**           | Why a repository layer was chosen, what else was considered, and what it costs. Written once    |
-| **NFR**           | The rule as a standing requirement — **plus how compliance is checked**                         |
-| **Best practice** | `adding-a-resource.md` — the steps for adding a resource _within_ that boundary                 |
-| **Rules file**    | Guidance that loads only when you're in the files it applies to                                 |
+| Artifact          | What it says about the boundary                                                                     |
+| ----------------- | --------------------------------------------------------------------------------------------------- |
+| **CLAUDE.md**     | One line, no rationale: `Don't: access db.json outside server/src/repositories/`. Always loaded     |
+| **ADR**           | Why a repository layer was chosen, what else was considered, and what it costs. Written once        |
+| **NFR**           | The rule as a standing requirement — **plus how compliance is checked**                             |
+| **Best practice** | `docs/best-practices/adding-a-resource.md` — the steps for adding a resource _within_ that boundary |
+| **Rules file**    | Guidance that loads only when you're in the files it applies to                                     |
 
 The ADR is **history** — why we chose this, once, and what we gave up. The NFR is **law** —
 what must hold now, and how you'd know. The recipe is **procedure**. CLAUDE.md is the
@@ -98,22 +112,39 @@ files → rules file.
 
 ### One home per fact
 
-The failure mode is writing the same content into all five. Then they drift, and nobody knows
-which one is authoritative. **Each fact lives in exactly one place; the others point at it.**
+The failure mode is writing the same content into all five. Then the copies stop matching —
+**drift**, the same word 2.b uses for copies across repos — and nobody knows which one is
+authoritative. **Each fact lives in exactly one place; the others point at it.**
 That is why CLAUDE.md has a trigger table instead of the docs' contents.
 
 The scope hierarchy is worth holding onto too: **Collective** (org-wide) → **Project** (this
 repo) → **Feature** (this slice). Most teams have none of the first and an accident of the second.
 
+There is a **sixth artifact**, and it's the only one that lives at the Collective layer: _how a
+standard reaches every repo, and how anyone knows they're current._ That one is a **process** doc
+your team defines rather than something an instructor hands over — Lab 2.b hands it to you, and
+[`distributing-standards.md`](../best-practices/distributing-standards.md) has the options and a
+template. Worth knowing it exists now, because everything you write today will eventually need to
+travel.
+
 ## What you'll do
 
-### 1. Watch one ADR get written
+### 1. Watch one ADR get written — then write yours
 
 Your instructor documents the repository-pattern boundary live: the gap, the evidence in the
 code, Claude drafting the Context, a human owning the Decision, commit.
 
+Then **you write the same ADR in your own copy** — same subject, your own words, ~10 minutes.
+Use the prompt starters below; the point is the drafting motion, not novelty.
+
 **Checkpoint:** you have an ADR staged in `docs/adr/` with the Status/Date/Deciders block completed
 and all three sections — Context, Decision, Consequences — filled.
+
+> **Group work vs your work, once, clearly:** the _clause list_ in step 2 is produced by your
+> group. Every _document_ — the ADR here, the NFR in step 3 — is authored by **you, in your own
+> copy**, from that shared list. That's what gets peer-reviewed and assessed. (Missed the
+> session or working solo? Ask in Slack for the stimulus diffs and seeded clauses, derive your
+> own list, and continue from step 3.)
 
 ### 2. Derive a rule from real code
 
@@ -131,18 +162,41 @@ prematurely — where the room disagrees is where the standard is actually being
 
 ### 3. Write it up as an NFR
 
-Turn the agreed clauses into a doc in `docs/nfr/`, copying the shape of NFR-0001. Every
-clause states **how compliance is checked**. Clauses that can't be checked get a recorded
-decision: accepted risk, human gate, or dropped.
+Turn the agreed clauses into a doc in `docs/nfr/`. Copy the _headings and tone_ of NFR-0001 —
+but note that NFR-0001 predates one thing you're being asked for: **per-clause checks**. Your
+doc adds a clause list shaped like this:
+
+```md
+## The rules
+
+1. A change under `server/src/**` ships with a test in the same PR.
+   **Checked by:** CI — the diff must touch a `*.test.ts` when it touches `server/src`.
+2. The test must have failed before the fix.
+   **Checked by:** — NOT MECHANICALLY CHECKABLE — decision: human gate (reviewer asks) — <name>
+```
+
+That second line is the **marking convention**: every clause states how compliance is checked,
+and a clause that _can't_ be checked is marked, carries a decision (accepted risk · human gate ·
+dropped), and a name. An unmarked unenforceable clause is the dangerous kind.
 
 **Checkpoint:** your NFR names how each clause is checked — and which ones can't be.
 
 ### 4. Wire both docs into CLAUDE.md
 
-A doc nothing points at is a doc nobody reads, Claude included. Add a row to the
-"Reference docs — read on demand" table for each new doc, phrased as a situation the reader
-is _in_ ("Changing X → read Y"), plus one binding line for the NFR so it applies without
-being fetched.
+A doc nothing points at is a doc nobody reads, Claude included. Two kinds of wiring, and
+they do different jobs:
+
+1. **A trigger row** per doc, in the "Reference docs — read on demand" table — phrased as a
+   situation the reader is _in_ ("Changing X → read Y"). This fetches the full doc when relevant.
+2. **A binding line** for the NFR: one line in CLAUDE.md's Do/Don't section that states the
+   rule's core so it applies in _every_ session, without being fetched. Concretely:
+
+```md
+- Do: every change under server/src ships with a test in the same PR (NFR-0002)
+```
+
+The doc is the law; the binding line is the sign on the wall. (This repo doesn't have one for
+NFR-0001 yet — you're setting the pattern.)
 
 Then **smoke-test it**: start a fresh session, ask Claude the rule, and confirm it reads
 your doc rather than guessing.
@@ -159,6 +213,14 @@ Swap in your own paths. Note what each one does _not_ do: none of them ask Claud
 | Draft an NFR           | `Using @docs/nfr/0001-external-api-error-handling.md as the form, turn these clauses into an NFR. For each clause add how compliance is checked. Mark any you cannot express as a check.` |
 | Wire it in             | `Add a row to the reference-docs table in @CLAUDE.md for @docs/nfr/<file>.md. Phrase the trigger as a situation, matching the existing rows.`                                             |
 
+## How it's assessed
+
+Lab rubric + peer review, same as Lab 1: **Completion · Quality · Process · Independence ·
+Insight**, each 1–4. There is deliberately no answer key for your NFR — Process (did you
+separate mechanical from fuzzy?) and Insight (can you say _why_ a clause resists checking?)
+carry the weight. This lab counts toward the **Agentic Developer** certification at the
+week-4 gate.
+
 ## Acceptance criteria
 
 - [ ] One **ADR** committed in `docs/adr/`, following the template, with at least one honest cost in Consequences
@@ -166,11 +228,13 @@ Swap in your own paths. Note what each one does _not_ do: none of them ask Claud
 - [ ] Clauses that can't be mechanically checked are **marked**, each with a recorded decision
 - [ ] Both docs **wired into CLAUDE.md** — trigger-table rows plus one binding line — and smoke-tested in a fresh session
 - [ ] Everything reviewed by a teammate via PR, CI green
+- [ ] A **reflection note** — 3–5 sentences in your PR description: what you learned, what surprised you, what you'd apply at work tomorrow
 
 ## Stretch
 
-- Derive clauses for the second convention as well
-- Convert a prose rule into a path-scoped `.claude/rules/` file, following `testing.md`
+- Derive clauses for the **second convention** — the store-boundary rule (only `server/src/repositories/` may import `db/store.ts`); it's the documented-but-unchecked case
+- The **half-gate case**: `console.log` in `server/src` fails lint, but `logger.info('wrong-first-arg', …)` passes silently. Write the clause that closes the gap, and tag it
+- Convert a prose rule into a path-scoped rules file, following `.claude/rules/testing.md`
 - Review a peer's ADR against the fuller MADR fields: Decision Drivers, Considered Options
 - Get a head start on the "how we use these" README — when each artifact is warranted, who authors it, who reviews it, where it lives. It's a required deliverable in 2.b, and today's session is when you know the answers
 
