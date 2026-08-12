@@ -11,7 +11,7 @@ Welcome to 2.b. The challenge in one breath: take the rule your group wrote last
 
 ## Slide 2 · Two hours, hands-on _(Today)_
 
-[CALIBRATED from Lab 1.b, 2026-08-12: agenda held · checkpoint gates worked · keep as built] The slack is real this time; protect it for verification, which is the step people skip. Prereq check right now, out loud: Lab 2.a done (ADR + NFR wired in), and the Hooks lesson done — anyone missing either pairs up for the build sections and catches up async per the handout. Assessment disclosure: same rubric, and today's hook or gate is also the Framework Practitioner artifact. ~2 min.
+[CALIBRATED from Lab 1.b, 2026-08-12: agenda held · checkpoint gates worked · keep as built] The blocks sum to ~103 — the slack is deliberate; protect it for verification, which is the step people skip. Prereq check right now, out loud: Lab 2.a done (ADR + NFR wired in), and the Hooks lesson done — anyone missing either pairs up for the build sections and catches up async per the handout. Assessment disclosure: same rubric, and today's hook or gate is also the Framework Practitioner artifact. ~2 min.
 
 ## Slide 3 · Where 2.a left us _(Recap)_
 
@@ -75,7 +75,7 @@ Slow down here and say why: this is the step people skip. Both tests visibly. If
 
 ## Slide 18 · The same pattern, somewhere you will recognise _(Your Stack)_
 
-Three minutes, no hands-on. Why it is here: their real world is SQL Server and stored procedures, and the pattern they just built on a JSON file needs to visibly transfer. The false-positive row is the most valuable one — it is the PARTLY tag from the severity slide, in the wild. ~3 min.
+Three minutes, no hands-on. Why it is here: their real world is SQL Server and stored procedures, and the pattern they just built on a JSON file needs to visibly transfer. The false-positive row is the most valuable one — it is the PARTLY tag from the severity slide, in the wild. The takeaway card now carries a SECOND worked example ("all backends must use SQLite" — ADR for the why, NFR for the must + CI dependency scan, deny rule on npm install pg*), whose org-wide reach also previews the hand-off two slides from now. Point at it; do not teach it. ~3 min.
 
 ## Slide 19 · The hook — enforce what you wrote _(Your Clause · 1 Of 3)_
 

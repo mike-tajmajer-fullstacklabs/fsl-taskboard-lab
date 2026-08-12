@@ -148,6 +148,32 @@ lines and makes the structural clauses above checkable:
 
 ---
 
+## A second worked example — decision → rule → gate, org-wide
+
+The stored-procedure convention above is one repo's rule. Here is the same shape on a rule whose
+reach is **every** repo — worth walking because the word "all" changes where everything lives.
+
+Suppose the team decides: _"all backends that use a database must use SQLite."_
+
+| Document                                   | What it holds                                                                                                                                                                                       | Why there and not elsewhere                                                                                                                                     |
+| ------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **ADR** — "SQLite for backend persistence" | The _decision_: context (ops burden, deployment simplicity), options considered (Postgres, MySQL), and an honest cost (concurrent-write limits; a service that outgrows it needs a superseding ADR) | ADRs are history — superseded, never edited. **The word "must" does not belong here**: a rule buried in an accepted ADR is invisible at the moment of violation |
+| **NFR** — "Database engine"                | The _statute_: "Backend services persist via SQLite only. **Checked by:** CI dependency scan — any of `pg`, `mysql2`, `mongodb` in a server manifest fails the gate. Rationale: ADR-00XX"           | NFRs are law — revised in place, and obliged to say how compliance is checked                                                                                   |
+| **Guardrail**                              | A deny/ask entry on `npm install pg*` (authoring time) + the CI dependency scan (merge time)                                                                                                        | Same rule, two enforcement points — the agent and everyone else                                                                                                 |
+
+Two things this example shows that a single-repo rule can't:
+
+- **"All backends" makes the rule Collective-layer.** Its reach exceeds any one repo's `docs/`
+  folder, so the ADR + NFR belong in the org's governance repo, with each backend repo carrying a
+  pointer (and inheriting the gate). That is exactly the problem
+  [`distributing-standards.md`](distributing-standards.md) exists to solve.
+- **The pair is real but asymmetric.** The ADR without the NFR is a decision nobody can act on at
+  review time; the NFR without the ADR is a rule that reads as arbitrary the first time someone
+  wants Postgres. They cross-reference — "rationale: ADR-00XX" / "enforced via NFR-00XX" — and
+  neither restates the other.
+
+---
+
 ## Start here
 
 1. Pick **one** rule you already have written down and cannot currently check.

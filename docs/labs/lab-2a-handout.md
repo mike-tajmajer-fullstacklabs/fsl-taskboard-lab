@@ -30,6 +30,7 @@ _(Study summary: ["CLAUDE.md vs AGENTS.md vs SKILL.md (2026)"](https://pub.towar
 ## Before the session
 
 - [ ] Your copy of this repo runs: `npm install`, `npm run reset-db`, `npm run dev`, `npm test` green
+- [ ] A clean branch: `git checkout -b feat/governance` — today's work ships as PRs from it
 - [ ] Your Lab 1.b PR link handy — we're going to look at real fixes from last week, possibly yours
 - [ ] Skim `docs/adr/0001-shared-api-response-envelope.md` and `docs/nfr/0001-external-api-error-handling.md` — one worked example of each form ships in this repo
 - [ ] Pull the lab materials into your copy (they didn't exist when your copy was created):
@@ -54,7 +55,12 @@ bash docs/labs/snippets/seed-lab2-issues.sh
 
 ## The five artifact types
 
-Two acronyms first, since everything below leans on them: an **ADR** is an _Architecture
+Three words, and how they relate — everything today hangs on this: a **rule** is what the team
+agrees on; a **document** is where the rule lives (one document can hold many rules); a rule
+written down and agreed is a **standard**. The five artifact types below are five _kinds of
+document_, distinguished by the question each answers.
+
+Two acronyms too, since everything below leans on them: an **ADR** is an _Architecture
 Decision Record_ — one decision, written down with its reasons and costs. An **NFR** is a
 _Non-Functional Requirement_ — a rule about _how_ the system must behave (logging, safety,
 error handling) rather than _what_ it does.
@@ -62,26 +68,26 @@ error handling) rather than _what_ it does.
 Each artifact answers a **different question**. That's the cleanest way to keep them apart — if you
 can name the question, you know which document you're writing.
 
-| Artifact                          | The question it answers                              | What it is                       |
-| --------------------------------- | ---------------------------------------------------- | -------------------------------- |
-| **CLAUDE.md**                     | "What must the agent know before anything else?"     | Always-loaded context + pointers |
-| **ADR**                           | "**Why** is it like this?"                           | One decision, with its cost      |
-| **NFR**                           | "**What must always be true**, and how do we check?" | A standing, testable rule        |
-| **Best-practice recipe**          | "**How** do I do X here?"                            | A worked procedure               |
-| **Rules file** (`.claude/rules/`) | "What applies **only** when touching these files?"   | Path-scoped context              |
+| Artifact                          | The question it answers                              | What it is                                 |
+| --------------------------------- | ---------------------------------------------------- | ------------------------------------------ |
+| **CLAUDE.md**                     | "What must the agent know before anything else?"     | Always-loaded context + pointers           |
+| **ADR**                           | "**Why** is it like this?"                           | One decision, with its cost                |
+| **NFR**                           | "**What must always be true**, and how do we check?" | A standing, testable rule                  |
+| **Best-practice recipe**          | "**How** do I do X here?"                            | A worked procedure — "recipe" from here on |
+| **Rules file** (`.claude/rules/`) | "What applies **only** when touching these files?"   | Path-scoped context                        |
 
 ### One subject, five artifacts
 
 This repo has a real rule: **only `server/src/repositories/` may import `db/store.ts`.** Here is
 what each artifact says about that same subject — and notice that none of them is redundant:
 
-| Artifact          | What it says about the boundary                                                                     |
-| ----------------- | --------------------------------------------------------------------------------------------------- |
-| **CLAUDE.md**     | One line, no rationale: `Don't: access db.json outside server/src/repositories/`. Always loaded     |
-| **ADR**           | Why a repository layer was chosen, what else was considered, and what it costs. Written once        |
-| **NFR**           | The rule as a standing requirement — **plus how compliance is checked**                             |
-| **Best practice** | `docs/best-practices/adding-a-resource.md` — the steps for adding a resource _within_ that boundary |
-| **Rules file**    | Guidance that loads only when you're in the files it applies to                                     |
+| Artifact       | What it says about the boundary                                                                     |
+| -------------- | --------------------------------------------------------------------------------------------------- |
+| **CLAUDE.md**  | One line, no rationale: `Don't: access db.json outside server/src/repositories/`. Always loaded     |
+| **ADR**        | Why a repository layer was chosen, what else was considered, and what it costs. Written once        |
+| **NFR**        | The rule as a standing requirement — **plus how compliance is checked**                             |
+| **Recipe**     | `docs/best-practices/adding-a-resource.md` — the steps for adding a resource _within_ that boundary |
+| **Rules file** | Guidance that loads only when you're in the files it applies to                                     |
 
 The ADR is **history** — why we chose this, once, and what we gave up. The NFR is **law** —
 what must hold now, and how you'd know. The recipe is **procedure**. CLAUDE.md is the
@@ -110,6 +116,21 @@ applies, and everything else waits to be fetched.
 NFR. Steps someone follows → recipe. Needed every session → CLAUDE.md. Only relevant in some
 files → rules file.
 
+**The pair people conflate — NFR vs recipe:** an NFR **binds** (what must be true, checkable;
+a deviation is a defect). A recipe **guides** (the recommended route there; deviate freely, so
+long as the NFRs still hold). This repo's own pair: the envelope rule is an NFR — a bare
+`res.json()` is a defect; `adding-a-resource.md` is a recipe — you may add a resource a
+different way and violate nothing.
+
+**Do ADRs and NFRs come in pairs?** No, and no. An NFR needs an ADR behind it only when the rule
+was a _contested choice_ — NFR-0001 (external-API errors) has no ADR, correctly: it's hygiene,
+not a decision. An ADR spawns an NFR only when the decision leaves a _rule you can check per
+change_ — a cloud-provider choice constrains everything and checks nothing. They pair when one
+subject has both, like the store boundary you'll work on today: ADR-0002 records _why_ the
+layer exists; the boundary NFR states _what must hold_ and how it's checked. When both exist
+they **cross-reference, never duplicate** — the NFR says "rationale: ADR-0002", the ADR says
+"enforced via NFR-0002". One home per fact.
+
 ### One home per fact
 
 The failure mode is writing the same content into all five. Then the copies stop matching —
@@ -117,8 +138,13 @@ The failure mode is writing the same content into all five. Then the copies stop
 authoritative. **Each fact lives in exactly one place; the others point at it.**
 That is why CLAUDE.md has a trigger table instead of the docs' contents.
 
-The scope hierarchy is worth holding onto too: **Collective** (org-wide) → **Project** (this
-repo) → **Feature** (this slice). Most teams have none of the first and an accident of the second.
+The scope hierarchy is worth holding onto too — a **layer** is just a rule's _reach_: who has
+to obey it. Everyone in every repo → **Collective** ("never commit secrets"). Everyone in one
+repo → **Project** ("responses only via the respond.ts envelope"). Only work touching certain
+files → **Feature/path** ("server tests must use makeTestDb()" — .claude/rules/testing.md). The
+reach decides where the document lives, so the right people and agents inherit it. Most teams
+have no Collective layer and an accident of a Project one — notice this repo's secrets rule is
+Collective-reach but parked in a Project file, because no org-wide home exists yet.
 
 There is a **sixth artifact**, and it's the only one that lives at the Collective layer: _how a
 standard reaches every repo, and how anyone knows they're current._ That one is a **process** doc
@@ -148,7 +174,8 @@ and all three sections — Context, Decision, Consequences — filled.
 
 ### 2. Derive a rule from real code
 
-We put three real fixes from last week on screen. You read them cold and answer one question:
+We put three fixes on screen — drawn from last week's exercise, anonymised, and where a shape
+didn't occur in your PRs, reconstructed. You read them cold and answer one question:
 
 > **Which of these are acceptable? Write the rule.**
 
@@ -183,13 +210,17 @@ dropped), and a name. An unmarked unenforceable clause is the dangerous kind.
 
 ### 4. Wire both docs into CLAUDE.md
 
-A doc nothing points at is a doc nobody reads, Claude included. Two kinds of wiring, and
-they do different jobs:
+A doc nothing points at is a doc nobody reads, Claude included. Two kinds of wiring — and
+they're the two loading modes from Lab 1 (pointer = **lazy**, `@import` = **eager**), each used
+where it earns its cost:
 
 1. **A trigger row** per doc, in the "Reference docs — read on demand" table — phrased as a
-   situation the reader is _in_ ("Changing X → read Y"). This fetches the full doc when relevant.
-2. **A binding line** for the NFR: one line in CLAUDE.md's Do/Don't section that states the
-   rule's core so it applies in _every_ session, without being fetched. Concretely:
+   situation the reader is _in_ ("Changing X → read Y"). This is Lab 1's lazy pointer with its
+   firing condition made explicit: the pointer is _how_ the doc loads; the trigger is _when_.
+2. **A binding line** for the NFR: a deliberate, one-line **eager** load — the rule's core in
+   CLAUDE.md's Do/Don't section, in force _every_ session without being fetched. Eager costs
+   every session, which is why it gets one sentence and the trigger row gets the document.
+   Concretely:
 
 ```md
 - Do: every change under server/src ships with a test in the same PR (NFR-0002)
