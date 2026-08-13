@@ -161,7 +161,10 @@ Your instructor documents the repository-pattern boundary live: the gap, the evi
 code, Claude drafting the Context, a human owning the Decision, commit.
 
 Then **you write the same ADR in your own copy** — same subject, your own words, ~10 minutes.
-Use the prompt starters below; the point is the drafting motion, not novelty.
+Use the prompt starters below; the point is the drafting motion, not novelty. The whole demo is
+written down step-by-step with worked examples in
+[`lab-2a-demo-walkthrough.md`](lab-2a-demo-walkthrough.md) — replay it after class, or use it to
+catch up if you missed the session.
 
 **Checkpoint:** you have an ADR staged in `docs/adr/` with the Status/Date/Deciders block completed
 and all three sections — Context, Decision, Consequences — filled.
@@ -174,18 +177,31 @@ and all three sections — Context, Decision, Consequences — filled.
 
 ### 2. Derive a rule from real code
 
-We put three fixes on screen — drawn from last week's exercise, anonymised, and where a shape
-didn't occur in your PRs, reconstructed. You read them cold and answer one question:
+We put three fixes for the same bug on screen — authored for this exercise. (Your own 1.b PRs
+all did it right; fix C is that discipline. A and B are what happens on real teams on busy
+days.) You read them cold and answer one question:
 
 > **Which of these are acceptable? Write the rule.**
 
-Your group produces a list of candidate clauses. For each one, tag it:
+Your group produces a list of candidate clauses — pick who writes, so there's one list everyone
+can see. You'll start from four seed clauses: verdict each one **keep / tighten / drop**, then
+add your own. A clause earns **keep** only if you can name **which of A / B / C it catches**.
+_Tighten_ means more checkable, not more strict. A good clause names an observable fact — "a change under
+`server/src` ships with a test in the same PR" is a clause; "tests should be good" is a wish.
 
-- **mechanical** — a script could decide this from the code or the diff
-- **fuzzy** — it needs a person
+For every clause, tag it:
+
+- **mechanical** — a script, given only the diff, could return pass/fail
+- **fuzzy** — it needs a person (if you need to know _intent_, it's fuzzy)
 
 That tag is the whole point. Do not skip it, and do not resolve the disagreements
 prematurely — where the room disagrees is where the standard is actually being made.
+
+**Where this lands:** the agreed clauses become your **NFR** in step 3. Why an NFR and not an
+ADR? Apply the quick test from earlier: this list must _always hold_ and says _how it's
+checked_ — present-tense law, revised in place. (If adopting the rule ever becomes genuinely
+contested, _that_ argument would earn an ADR. The know-how — "how do I write a failing test
+first?" — is recipe material.)
 
 ### 3. Write it up as an NFR
 
@@ -271,13 +287,16 @@ week-4 gate.
 
 ## Common stuck points
 
-| Symptom                                            | What to do                                                                                                            |
-| -------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------- |
-| "I don't know what decision to write an ADR about" | Use the trigger: hard to reverse, contested, or a newcomer would ask why. The store boundary qualifies on all three   |
-| The NFR reads like a wish                          | If you can't say how it's checked, it isn't an NFR yet. Write the check first, then work backwards to the wording     |
-| Claude wrote the whole doc and it looks fine       | Read it as someone who disagrees. If there's nothing to disagree with, it's a description, not a decision             |
-| The group can't agree on a clause                  | Good. Write both versions down and say which one you shipped and why — that sentence is more valuable than the clause |
-| "This rule can't be enforced, so why write it?"    | Unenforceable rules still coordinate people. What they must not do is _pretend_ to be enforced — hence the marking    |
+| Symptom                                            | What to do                                                                                                                   |
+| -------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------- |
+| "I don't know what decision to write an ADR about" | Use the trigger: hard to reverse, contested, or a newcomer would ask why. The store boundary qualifies on all three          |
+| The NFR reads like a wish                          | If you can't say how it's checked, it isn't an NFR yet. Write the check first, then work backwards to the wording            |
+| Claude wrote the whole doc and it looks fine       | Read it as someone who disagrees. If there's nothing to disagree with, it's a description, not a decision                    |
+| The group can't agree on a clause                  | Good. Write both versions down and say which one you shipped and why — that sentence is more valuable than the clause        |
+| "This rule can't be enforced, so why write it?"    | Unenforceable rules still coordinate people. What they must not do is _pretend_ to be enforced — hence the marking           |
+| "Why write an ADR for a decision already made?"    | Recording is not deciding — a retroactive ADR captures the _why_ before it evaporates. Status: Accepted; Date: when recorded |
+| "What if I disagree with the decision?"            | Record it anyway (it _is_ this repo's reality) and put your objection in Consequences as a cost. Recording ≠ endorsing       |
+| Every clause ends up "Checked by: code review"     | That's the human gate as a reflex, not a decision. For each one, ask once: could a script check _this_ from the diff?        |
 
 ## Where this goes next
 
