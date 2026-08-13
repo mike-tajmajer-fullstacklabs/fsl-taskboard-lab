@@ -1,6 +1,7 @@
 # Lab handouts
 
 Student-facing material for the Lab 2 blocks. Read the handout for the block you're in.
+Every handout also ships as a **PDF** (same name, `.pdf`) for offline reading and distribution.
 
 | Block   | Handout                                                      | You'll produce                                                                                                                                                             |
 | ------- | ------------------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
