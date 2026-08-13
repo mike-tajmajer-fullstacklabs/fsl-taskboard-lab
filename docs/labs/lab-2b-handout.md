@@ -4,7 +4,7 @@
 **Duration:** ~2 hours, facilitated.
 **Surface:** your own copy of this repo.
 
-**The challenge.** Take the rule your group wrote last week and give it teeth: a hook that stops
+**The challenge.** Take the rule the class agreed last week and give it teeth: a hook that stops
 the agent while it writes, and a CI gate that stops anyone at merge time — both verified in both
 directions, with the unenforceable clauses honestly decided rather than quietly dropped.
 
@@ -170,7 +170,7 @@ when it edits a file in `server/src/repositories/`.
 
 ### 2. Enforce your own clause — the hook
 
-Take the clause your group derived in 2.a (this **revisits your 2.a NFR** — the residue decisions
+Take one mechanical clause from your 2.a NFR (this **revisits that document** — the residue decisions
 you record here update that same document). Start from `docs/labs/snippets/hook-skeleton.js`:
 copy it to `.claude/hooks/check-convention.js`, delete the two example rules, put yours in.
 

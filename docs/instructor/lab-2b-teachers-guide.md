@@ -2,11 +2,11 @@
 
 How to run the 2.b session (26 slides, agenda ~103 min in a 120 cap), **over Google Meet**.
 Audience: instructors; **deliberately not linked from any student-facing document** — it carries
-the rescue code for both tracks, which must never appear on screen. Companion to the slide notes
+the rescue code for both targets, which must never appear on screen. Companion to the slide notes
 and to `docs/labs/lab-2b-demo-walkthrough.md` (the student-replayable demo script).
 
 Calibrated against Lab 1.b (2026-08-12 interview): checkpoint gates worked; the room waits to be
-told — the demo is a build-along and both exercise tracks have named targets for that reason.
+told — the demo is a build-along and the exercise has named targets for that reason: a default (the sibling-test nudge) and a store-boundary choice for anyone who did the 2.a stretch.
 
 ---
 
@@ -62,7 +62,7 @@ ends by handing the team the sixth artifact: how standards travel.
 
 ## 5. Rescue code (never on screen — Slack it to a stuck student, one piece at a time)
 
-**Track A — test discipline (PostToolUse nudge: edited server/src `*.ts` with no sibling test):**
+**Default target — test discipline (PostToolUse nudge: edited server/src `*.ts` with no sibling test):**
 
 ```js
 // inside the hook, after parsing filePath:
@@ -93,7 +93,7 @@ if grep -qE '^server/src/.*\.ts$' changed.txt && ! grep -qE '\.test\.ts$' change
 fi
 ```
 
-**Track B — store boundary (PreToolUse block: import of db/store outside repositories/):**
+**Store-boundary choice (PreToolUse block: import of db/store outside repositories/):**
 
 ```js
 const path = filePath.replaceAll('\\', '/');
@@ -140,8 +140,8 @@ that is a teaching moment, not a bug.)
 | ----------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | "My hook never fires" (will be the most common) | New session? Then matcher, then Windows paths. It's on the steps slide and in the walkthrough                                                                  |
 | "My gate doesn't run"                           | Draft PR open? `on: pull_request` runs nothing for a bare branch                                                                                               |
-| A student's clause is fuzzy and they're stalled | They build the mechanical core of the group list instead; the fuzzy clause becomes their residue entry — nobody builds nothing                                 |
-| Track B gate fails on index.ts                  | Their ADR's own exception clause, live — point them at their ADR, not at the code                                                                              |
+| A student's clause is fuzzy and they're stalled | They build the mechanical core of the AGREED list instead; the fuzzy clause becomes their residue entry — nobody builds nothing                                |
+| Store-boundary gate fails on index.ts           | Their ADR's own exception clause, live — point them at their ADR, not at the code                                                                              |
 | Someone disables the seed hook to "simplify"    | Stop that gently and publicly — the layers are the exhibit; removing one to make another easier is the anti-lesson                                             |
 | Exercise overruns                               | Cut order (already in the deck notes): README → async; layers 3–5 compression; stored-proc slide drops. Never cut verify-both-ways, the bypass, or the residue |
 | Chat floods with refusal texts at once          | Good — that's the checkpoint working. Skim for names missing, not for content                                                                                  |

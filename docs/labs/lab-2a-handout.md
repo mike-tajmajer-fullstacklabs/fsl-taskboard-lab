@@ -169,11 +169,13 @@ catch up if you missed the session.
 **Checkpoint:** you have an ADR staged in `docs/adr/` with the Status/Date/Deciders block completed
 and all three sections — Context, Decision, Consequences — filled.
 
-> **Group work vs your work, once, clearly:** the _clause list_ in step 2 is produced by your
-> group. Every _document_ — the ADR here, the NFR in step 3 — is authored by **you, in your own
-> copy**, from that shared list. That's what gets peer-reviewed and assessed. (Missed the
-> session or working solo? Ask in Slack for the stimulus diffs and seeded clauses, derive your
-> own list, and continue from step 3.)
+> **Whose work is what, once, clearly:** everything in this lab is authored by **you, in your
+> own copy** — the clause list in step 2, the ADR here, the NFR in step 3. The only shared step
+> is the short class compare after step 2, where the lists go side by side and the class agrees
+> one **AGREED** list — calibration, not committee work. (Missed the session or working solo?
+> The lab works end-to-end alone, by design —
+> [`lab-2a-derive-walkthrough.md`](lab-2a-derive-walkthrough.md) is the step-by-step guide for
+> exactly that. Don't open it before the live session; it replays the discovery.)
 
 ### 2. Derive a rule from real code
 
@@ -183,9 +185,10 @@ days.) You read them cold and answer one question:
 
 > **Which of these are acceptable? Write the rule.**
 
-Your group produces a list of candidate clauses — pick who writes, so there's one list everyone
-can see. You'll start from four seed clauses: verdict each one **keep / tighten / drop**, then
-add your own. A clause earns **keep** only if you can name **which of A / B / C it catches**.
+You produce your own list of candidate clauses — on your own, no conferring yet. Start from
+the four seed clauses: verdict each one **keep / tighten / drop**, then add your own, and mark
+the one you're **least sure** about. A clause earns **keep** only if you can name **which of
+A / B / C it catches**.
 _Tighten_ means more checkable, not more strict. A good clause names an observable fact — "a change under
 `server/src` ships with a test in the same PR" is a clause; "tests should be good" is a wish.
 
@@ -194,10 +197,14 @@ For every clause, tag it:
 - **mechanical** — a script, given only the diff, could return pass/fail
 - **fuzzy** — it needs a person (if you need to know _intent_, it's fuzzy)
 
-That tag is the whole point. Do not skip it, and do not resolve the disagreements
-prematurely — where the room disagrees is where the standard is actually being made.
+That tag is the whole point. Do not skip it.
 
-**Where this lands:** the agreed clauses become your **NFR** in step 3. Why an NFR and not an
+**Then the compare:** paste your list into the shared Doc under your name. The class puts the
+lists side by side and agrees **one AGREED list** — where the lists disagree is where the
+standard is actually being made, so the least-sure clauses get read out loud. Keep your own
+verdicts visible; the compare is calibration, not a vote to erase them.
+
+**Where this lands:** the AGREED clauses become your **NFR** in step 3. Why an NFR and not an
 ADR? Apply the quick test from earlier: this list must _always hold_ and says _how it's
 checked_ — present-tense law, revised in place. (If adopting the rule ever becomes genuinely
 contested, _that_ argument would earn an ADR. The know-how — "how do I write a failing test
@@ -205,7 +212,10 @@ first?" — is recipe material.)
 
 ### 3. Write it up as an NFR
 
-Turn the agreed clauses into a doc in `docs/nfr/`. Copy the _headings and tone_ of NFR-0001 —
+Turn the AGREED clauses into a doc in `docs/nfr/` — your wording, your document. If your list
+disagreed with the class list, AGREED is still what you write up; your dissent goes in as a
+**dropped clause with a reason** — that's how disagreement with a live standard is recorded on
+a real team. Copy the _headings and tone_ of NFR-0001 —
 but note that NFR-0001 predates one thing you're being asked for: **per-clause checks**. Your
 doc adds a clause list shaped like this:
 
@@ -287,16 +297,16 @@ week-4 gate.
 
 ## Common stuck points
 
-| Symptom                                            | What to do                                                                                                                   |
-| -------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------- |
-| "I don't know what decision to write an ADR about" | Use the trigger: hard to reverse, contested, or a newcomer would ask why. The store boundary qualifies on all three          |
-| The NFR reads like a wish                          | If you can't say how it's checked, it isn't an NFR yet. Write the check first, then work backwards to the wording            |
-| Claude wrote the whole doc and it looks fine       | Read it as someone who disagrees. If there's nothing to disagree with, it's a description, not a decision                    |
-| The group can't agree on a clause                  | Good. Write both versions down and say which one you shipped and why — that sentence is more valuable than the clause        |
-| "This rule can't be enforced, so why write it?"    | Unenforceable rules still coordinate people. What they must not do is _pretend_ to be enforced — hence the marking           |
-| "Why write an ADR for a decision already made?"    | Recording is not deciding — a retroactive ADR captures the _why_ before it evaporates. Status: Accepted; Date: when recorded |
-| "What if I disagree with the decision?"            | Record it anyway (it _is_ this repo's reality) and put your objection in Consequences as a cost. Recording ≠ endorsing       |
-| Every clause ends up "Checked by: code review"     | That's the human gate as a reflex, not a decision. For each one, ask once: could a script check _this_ from the diff?        |
+| Symptom                                            | What to do                                                                                                                      |
+| -------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------- |
+| "I don't know what decision to write an ADR about" | Use the trigger: hard to reverse, contested, or a newcomer would ask why. The store boundary qualifies on all three             |
+| The NFR reads like a wish                          | If you can't say how it's checked, it isn't an NFR yet. Write the check first, then work backwards to the wording               |
+| Claude wrote the whole doc and it looks fine       | Read it as someone who disagrees. If there's nothing to disagree with, it's a description, not a decision                       |
+| Your list disagrees with the AGREED list           | Good. Write the AGREED version, record yours as a dropped clause with a reason — that sentence is more valuable than the clause |
+| "This rule can't be enforced, so why write it?"    | Unenforceable rules still coordinate people. What they must not do is _pretend_ to be enforced — hence the marking              |
+| "Why write an ADR for a decision already made?"    | Recording is not deciding — a retroactive ADR captures the _why_ before it evaporates. Status: Accepted; Date: when recorded    |
+| "What if I disagree with the decision?"            | Record it anyway (it _is_ this repo's reality) and put your objection in Consequences as a cost. Recording ≠ endorsing          |
+| Every clause ends up "Checked by: code review"     | That's the human gate as a reflex, not a decision. For each one, ask once: could a script check _this_ from the diff?           |
 
 ## Where this goes next
 

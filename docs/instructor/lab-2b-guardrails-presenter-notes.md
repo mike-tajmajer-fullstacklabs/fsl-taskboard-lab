@@ -7,7 +7,7 @@ Speaker notes for `lab-2b-guardrails.pptx` (the same text is attached to each sl
 
 ## Slide 1 · Guardrails, and Making Standards Travel
 
-Welcome to 2.b. The challenge in one breath: take the rule your group wrote last week and give it teeth — a hook that stops the agent while it writes, and a CI gate that stops anyone at merge time, both verified in both directions, with the unenforceable clauses honestly decided rather than quietly dropped. The interesting output today is not the hook — it is the list of things the hook could not check. ~1 min.
+Welcome to 2.b. The challenge in one breath: take the rule the class agreed last week and give it teeth — a hook that stops the agent while it writes, and a CI gate that stops anyone at merge time, both verified in both directions, with the unenforceable clauses honestly decided rather than quietly dropped. The interesting output today is not the hook — it is the list of things the hook could not check. ~1 min.
 
 ## Slide 2 · Two hours, hands-on _(Today)_
 
@@ -67,7 +67,7 @@ Deliberately parallel to the exhibit they just read — the shape is the point, 
 
 ## Slide 16 · Twenty lines, no dependencies _(Demo · The Check)_
 
-Type it live if the room is comfortable; paste if behind. Say the Windows path normalisation out loud — it is the bug every group hits and why the hook is Node, not shell. Then register it together and restart sessions — the forgotten-restart is the "my hook never fires" stuck point. ~5 min.
+Type it live if the room is comfortable; paste if behind. Say the Windows path normalisation out loud — it is the bug every cohort hits and why the hook is Node, not shell. Then register it together and restart sessions — the forgotten-restart is the "my hook never fires" stuck point. ~5 min.
 
 ## Slide 17 · Both directions, then the bypass _(Demo · Verify)_
 
@@ -83,7 +83,7 @@ Three minutes, no hands-on. Why it is here: their real world is SQL Server and s
 
 ## Slide 20 · The hook — enforce what you wrote _(Your Clause · 1 Of 3)_
 
-[CALIBRATED from Lab 1.b, 2026-08-12: agenda held · checkpoint gates worked · keep as built] Remote circulation = one whole-call chat nudge at ~7 min ("what does your allow case replay?" — no answer means verification is about to be skipped) + Slack for 1:1s. WHAT EACH TRACK BUILDS (rescue detail in the teachers guide, never on screen): test-discipline = PostToolUse nudge when an edited server/src *.ts has no sibling *.test.ts; store-boundary = PreToolUse block when a written file outside repositories/ contains an import of db/store. COMMON QUESTIONS — Q: "My clause is fuzzy — what do I build?" A: build the mechanical core of your list instead, and your fuzzy clause becomes a residue decision; nobody builds nothing. Q: "Block or nudge for mine?" A: run the PARTLY test — if your check can false-positive, nudge; write the reason down either way. Q: "Do I need the hook AND the gate?" A: yes — different audiences: the hook stops the agent, the gate stops anyone. ~15 min.
+[CALIBRATED from Lab 1.b, 2026-08-12: agenda held · checkpoint gates worked · keep as built] Remote circulation = one whole-call chat nudge at ~7 min ("what does your allow case replay?" — no answer means verification is about to be skipped) + Slack for 1:1s. WHAT EACH TARGET IS (rescue detail in the teachers guide, never on screen): default = PostToolUse nudge when an edited server/src *.ts has no sibling *.test.ts; store-boundary choice = PreToolUse block when a written file outside repositories/ contains an import of db/store. COMMON QUESTIONS — Q: "My clause is fuzzy — what do I build?" A: build the mechanical core of your list instead, and your fuzzy clause becomes a residue decision; nobody builds nothing. Q: "Block or nudge for mine?" A: run the PARTLY test — if your check can false-positive, nudge; write the reason down either way. Q: "Do I need the hook AND the gate?" A: yes — different audiences: the hook stops the agent, the gate stops anyone. ~15 min.
 
 ## Slide 21 · Checkpoint 2 _(Checkpoint)_
 
@@ -99,7 +99,7 @@ Short and satisfying: the reviewer quoting their own NFR back at them is the mom
 
 ## Slide 24 · Let us compare _(Review)_
 
-Push hardest on the residue question — it reveals whether the lesson landed. A group with an empty residue column has either a trivial rule or has not looked. ~10 min.
+Push hardest on the residue question — it reveals whether the lesson landed. A PR with an empty residue column has either a trivial rule or has not looked. ~10 min.
 
 ## Slide 25 · The sixth artifact, and it is yours _(Hand-Off)_
 

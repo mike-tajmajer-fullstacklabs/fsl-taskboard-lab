@@ -6,8 +6,7 @@ that didn't land live. Same rule as the 2.a walkthrough: this is the instructor'
 there is no secret version.
 
 This covers **the demo guardrail only** (the read-only `db.json` rule). Your own clause — the
-one your group derived in 2.a — is the exercise; this document deliberately doesn't build it
-for you.
+one from your 2.a NFR — is the exercise; this document deliberately doesn't build it for you.
 
 **Before you start:** your own copy, branch `feat/governance`, the 2.a docs committed, and the
 Claude Code **Hooks** lesson done.
