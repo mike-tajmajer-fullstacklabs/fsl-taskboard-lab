@@ -155,7 +155,9 @@ route around it, and a bypassed gate is worse than no gate because it looks like
 
 Your instructor extends the read-only-database rule — and **you build the same thing in your own
 copy as they go**: CLAUDE.md line → deny rule → hook → **verified in both directions** → bypass
-documented.
+documented. The whole build is written down step-by-step with the code in
+[`lab-2b-demo-walkthrough.md`](lab-2b-demo-walkthrough.md) — replay it after class, or use it to
+fix a step that didn't land live.
 
 Two clarifications worth having before you start. First, run `npm run reset-db` so `db.json`
 exists — it's generated and git-ignored, so a fresh copy doesn't have it. Second, this rule
@@ -210,7 +212,9 @@ text is in your PR.
 The hook stops the agent. This stops anyone. Start from `docs/labs/snippets/governance-gate.yml`,
 copy it to `.github/workflows/governance.yml`, and encode the _mechanical core_ of your clause.
 Note the `fetch-depth: 0` comment — without it any diff against the base branch fails with an
-unhelpful error.
+unhelpful error. And the gotcha that catches half of every cohort: **the gate runs on
+`pull_request`** — push your branch and **open a draft PR**, or nothing runs and your gate will
+look broken when it's merely unasked.
 
 Then the part that matters most:
 

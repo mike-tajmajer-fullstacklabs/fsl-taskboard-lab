@@ -7,8 +7,11 @@ Student-facing material for the Lab 2 blocks. Read the handout for the block you
 | **2.a** | [Writing the Standards Down](lab-2a-handout.md)              | An ADR + an NFR (unenforceable clauses marked), wired into CLAUDE.md, PR-reviewed                                                                                          |
 | **2.b** | [Guardrails, and Making Standards Travel](lab-2b-handout.md) | A verified hook + CI gate, a documented bypass, a decision per clause — plus the "how we use these" README, a distribution decision with an owner, and a named port target |
 
-The 2.a demo is also written down — [`lab-2a-demo-walkthrough.md`](lab-2a-demo-walkthrough.md):
-all six steps with prompts, example replies, and the finished ADR. Replay it at your own pace.
+Both demos are written down for replay at your own pace:
+[`lab-2a-demo-walkthrough.md`](lab-2a-demo-walkthrough.md) (the ADR — six steps, prompts, example
+replies, the finished document) and
+[`lab-2b-demo-walkthrough.md`](lab-2b-demo-walkthrough.md) (the guardrail — seven steps with the
+code, both verifications, the bypass).
 
 Snippets to copy into your own repo live in [`snippets/`](snippets/) — one of them (2.b's settings block) must be **merged** into an existing file, never pasted over it:
 
