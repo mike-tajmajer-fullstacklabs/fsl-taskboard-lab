@@ -1,12 +1,13 @@
 # Lab handouts
 
-Student-facing material for the Lab 2 blocks. Read the handout for the block you're in.
+Student-facing material for the Lab 2 blocks and the Lab 4 capstone. Read the handout for the block you're in.
 Every handout also ships as a **PDF** (same name, `.pdf`) for offline reading and distribution.
 
 | Block   | Handout                                                      | You'll produce                                                                                                                                                             |
 | ------- | ------------------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | **2.a** | [Writing the Standards Down](lab-2a-handout.md)              | An ADR + an NFR (unenforceable clauses marked), wired into CLAUDE.md, PR-reviewed                                                                                          |
 | **2.b** | [Guardrails, and Making Standards Travel](lab-2b-handout.md) | A verified hook + CI gate, a documented bypass, a decision per clause — plus the "how we use these" README, a distribution decision with an owner, and a named port target |
+| **4**   | [Capstone (Demo Day)](lab-4-handout.md)                      | One owned, team-shared artifact from the five-option menu, used in ≥1 real instance, presented at Demo Day (Aug 27, 2026) with its evidence                                |
 
 Both demos are written down for replay at your own pace:
 [`lab-2a-demo-walkthrough.md`](lab-2a-demo-walkthrough.md) (the ADR — six steps, prompts, example
