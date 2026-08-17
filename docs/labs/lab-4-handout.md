@@ -36,9 +36,12 @@ have them), a **named teammate who will adopt it**, and a short **"how to use" R
 3. **Practical demonstration** — run it on real work, live (~5 min).
 4. **Questions & answers** from the room (~3 min).
 
-**Done means:** ☐ one owned, committed, team-shared artifact from the menu · ☐ used or validated
-in ≥1 real instance · ☐ the three evidence items · ☐ Demo Day presentation delivered. Counts
-toward **Framework Practitioner** — a governance-doc capstone still certifies.
+**Done means:**
+
+- [ ] one owned, committed, team-shared artifact from the menu
+- [ ] used or validated in at least one real instance
+- [ ] the three evidence items
+- [ ] Demo Day presentation delivered — counts toward **Framework Practitioner** (a governance-doc capstone still certifies)
 
 **Stuck?** "Nothing to automate" is fine — ship a skill, doc, or connector. Scope too big — build
 the smallest useful version (start from the automation-asks list or your Lab 2 work). No adopter
@@ -46,12 +49,13 @@ yet — recruit one teammate. That's the point.
 
 <style>
 /* One-page fit for the PDF export only — GitHub strips this block when rendering. */
-body { font-size: 9.5pt; line-height: 1.4; }
-p, ul, ol { margin: 0.5em 0; }
+body { font-size: 9.5pt; line-height: 1.35; }
+p, ul, ol { margin: 0.45em 0; }
 h1 { margin: 0 0 0.35em; }
-h2 { margin-top: 0.8em; margin-bottom: 0.35em; }
+h2 { margin-top: 0.7em; margin-bottom: 0.3em; }
 td, th { padding: 3px 7px; }
 table { font-size: 9pt; }
 li { margin: 1px 0; }
-@page { margin: 12mm 15mm; }
+ul, ol { padding-left: 1.6em; }
+@page { margin: 10mm 15mm; }
 </style>
