@@ -9,11 +9,17 @@ Every handout also ships as a **PDF** (same name, `.pdf`) for offline reading an
 | **2.b** | [Guardrails, and Making Standards Travel](lab-2b-handout.md) | A verified hook + CI gate, a documented bypass, a decision per clause — plus the "how we use these" README, a distribution decision with an owner, and a named port target |
 | **4**   | [Capstone (Demo Day)](lab-4-handout.md)                      | One owned, team-shared artifact from the five-option menu, used in ≥1 real instance, presented at Demo Day (Aug 27, 2026) with its evidence                                |
 
-Both demos are written down for replay at your own pace:
-[`lab-2a-demo-walkthrough.md`](lab-2a-demo-walkthrough.md) (the ADR — six steps, prompts, example
-replies, the finished document) and
-[`lab-2b-demo-walkthrough.md`](lab-2b-demo-walkthrough.md) (the guardrail — seven steps with the
-code, both verifications, the bypass).
+Every demo is written down for replay at your own pace.
+2.a: [`lab-2a-demo-walkthrough.md`](lab-2a-demo-walkthrough.md) (the ADR — six steps, prompts,
+example replies, the finished document).
+2.b runs four short demos, one per enforcement layer, told as a timeline:
+
+| #   | Walkthrough                                                              | Layer / moment                                                    |
+| --- | ------------------------------------------------------------------------ | ------------------------------------------------------------------ |
+| 1   | [Permissions](lab-2b-demo-1-permissions-walkthrough.md)                  | 2a — the allow/ask/deny warm-up everyone does live                |
+| 2   | [The git hook](lab-2b-demo-2-git-hook-walkthrough.md)                    | 3, commit time — the hook you already know; yours as a stretch    |
+| 3   | [The Claude hook](lab-2b-demo-3-claude-hook-walkthrough.md)              | 2b, authoring time — the build-along guardrail, seven steps       |
+| 4   | [Reading the CI](lab-2b-demo-4-ci-walkthrough.md)                        | 4, merge time — what already runs, and the written-but-unrun rule |
 
 Snippets to copy into your own repo live in [`snippets/`](snippets/) — one of them (2.b's settings block) must be **merged** into an existing file, never pasted over it:
 
@@ -21,6 +27,7 @@ Snippets to copy into your own repo live in [`snippets/`](snippets/) — one of 
 | --------------------- | ------- | ---------------------------------------------------------------------------- |
 | `hook-skeleton.js`    | 2.b     | Hook plumbing — block and nudge shapes, two throwaway rules. Replace them    |
 | `governance-gate.yml` | 2.b     | CI gate plumbing, including the `fetch-depth: 0` gotcha                      |
+| `commit-msg.sh`       | 2.b     | The layer-3 commit hook from demo 2 — five lines; copy into `.husky/`        |
 | `seed-lab2-issues.sh` | 2.a     | Optional — seeds the Lab 2 backlog into your copy so `Closes #N` still works |
 
 ## Why these are snippets and not files in your repo
