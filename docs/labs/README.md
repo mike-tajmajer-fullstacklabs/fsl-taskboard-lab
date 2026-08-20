@@ -19,7 +19,7 @@ example replies, the finished document).
 | 1   | [Permissions](lab-2b-demo-1-permissions-walkthrough.md)                  | 2a — the allow/ask/deny warm-up everyone does live                |
 | 2   | [The git hook](lab-2b-demo-2-git-hook-walkthrough.md)                    | 3, commit time — the hook you already know; yours as a stretch    |
 | 3   | [The Claude hook](lab-2b-demo-3-claude-hook-walkthrough.md)              | 2b, authoring time — the build-along guardrail, seven steps       |
-| 4   | [Reading the CI](lab-2b-demo-4-ci-walkthrough.md)                        | 4, merge time — what already runs, and the written-but-unrun rule |
+| 4   | [Reading the CI](lab-2b-demo-4-ci-walkthrough.md) _(self-guided)_       | 4, merge time — what already runs, and the written-but-unrun rule |
 
 Snippets to copy into your own repo live in [`snippets/`](snippets/) — one of them (2.b's settings block) must be **merged** into an existing file, never pasted over it:
 

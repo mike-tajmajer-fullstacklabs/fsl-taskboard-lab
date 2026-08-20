@@ -45,8 +45,10 @@ one rule module, two enforcement points.
 ## Step 3 — Where your gate goes
 
 The governance gate you build in the exercise (`.github/workflows/governance.yml`, handout §3) is
-a **sibling of this file** — same trigger, same Actions tab, one more check on the PR. Two things
-to know before you build:
+a **sibling of this file** — same trigger, same Actions tab, one more check on the PR. To be
+precise about what it is: GitHub cannot run your Claude hook (no agent runs there), so the gate
+is a **second program** — your rule's check re-written as a grep — that GitHub runs on every
+pull request. Two things to know before you build:
 
 - **It only runs when a PR exists.** A pushed branch alone runs nothing — open a draft PR to see
   it fire, or your gate will look broken when it's merely unasked.

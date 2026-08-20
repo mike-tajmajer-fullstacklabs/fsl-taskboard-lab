@@ -1,6 +1,6 @@
 # Lab 2.b teacher's guide — guardrails over Google Meet
 
-How to run the 2.b session (27 slides, agenda ~112 min in a 120 cap), **over Google Meet, with
+How to run the 2.b session (26 slides, agenda ~107 min in a 120 cap), **over Google Meet, with
 the participants gathered at physical tables on their side**. Audience: instructors;
 **deliberately not linked from any student-facing document** — it carries the rescue code for
 all four menu rules, which must never appear on screen. Companion to the slide notes and to
@@ -49,8 +49,8 @@ standards travel.
 
 ## 3. Prep checklist
 
-- [ ] Deck at slide 1; the four demo walkthroughs open in tabs — they are your demo scripts,
-      verbatim
+- [ ] Deck at slide 1; demo walkthroughs 1–3 open in tabs — they are your demo scripts,
+      verbatim (demo 4, reading the CI, is self-guided student material — no live beat)
 - [ ] Your own copy reset, WITHOUT the db.json guardrail and WITHOUT husky (you build both live;
       pre-built kills the wrong-turns that teach)
 - [ ] The rescue code from §6 in a scratch file — for Slack DMs to stuck students, never for
@@ -74,11 +74,10 @@ standards travel.
 | Checkpoint 1 (18)           | Refusal texts in chat; read them as they land                                                                                                                     |
 | Your rule: menu (19)        | Read all four rows aloud, give tables a quiet minute to pick; choosing together is fine, clustering is fine. Own rule? One filter: detectable from path or content |
 | Your rule: hook (20–21)     | One whole-call chat nudge at ~7 min: "what does your allow case replay?" Slack for 1:1s. Checkpoint 2: the hook's text in the PR                                   |
-| CI today (22)               | Run card 4. Open the real ci.yml; ask "what rule is written but never run?" and WAIT                                                                              |
-| Your rule: gate (23–24)     | Draft-PR gotcha said BEFORE they start. Checkpoint 3: PR link + red-then-green check in chat; use the CI wait to skim links                                        |
-| Review (25)                 | Two or three volunteers screen-share. Push hardest on the false-positive question; a table's severity disagreement is better material than a working demo         |
-| Hand-off (26)               | Three minutes, framing over content; done = rung + first move + a named person                                                                                     |
-| Wrap (27)                   | Retro waterfall; reflection note into the PR now; **copy the chat**; file the capture within 24h                                                                   |
+| Your rule: gate (22–23)     | Say the mechanism first (GitHub can't run their hook — second program). Draft-PR gotcha BEFORE they start. Checkpoint 3: PR link + red-then-green check in chat    |
+| Review (24)                 | Two or three volunteers screen-share. Push hardest on the false-positive question; a table's severity disagreement is better material than a working demo         |
+| Hand-off (25)               | Three minutes, framing over content; done = rung + first move + a named person                                                                                     |
+| Wrap (26)                   | Retro waterfall; reflection note into the PR now; **copy the chat**; file the capture within 24h                                                                   |
 
 ## 5. Demo run cards
 
@@ -170,22 +169,10 @@ answers with BLOCKED/Why/Instead/Done. Restore the entries. **Say: "the wall sto
 redirects — and your clause this afternoon can ONLY be a hook, because deny rules match paths
 and hooks run logic."** The hook's text is the evidence they save.
 
-### Run card 4 — CI today (layer 4) · 3 min · slide 21
-
-Student replay: `docs/labs/lab-2b-demo-4-ci-walkthrough.md`.
-
-1. Open `.github/workflows/ci.yml` — the real file, not the slide. "Lint, typecheck, tests, on
-   every PR and push to main. Deterministic, non-AI guardrails have been holding this repo the
-   whole time." (~1 min)
-2. Ask: **"one of the package.json scripts is a rule that's written but never run — which?"**
-   Then WAIT. Someone finds `format:check`. "A written rule with no gate at any layer — that
-   gap-hunt is the skill; closing it is a one-line decision about the cheapest layer." (~1.5 min)
-3. Land the division of labour: "the repo's review agent is told NOT to re-report what lint and
-   typecheck catch. Non-AI guardrails are the floor; spend the AI layer on what only it can
-   see. Your own Actions pipeline is this same layer, built in-house." (~0.5 min)
-
-**Prepared failure:** nobody finds it. Narrow twice — "look at package.json's scripts", then
-"which script does ci.yml never mention?" — never just tell.
+_(The former "CI today" run card was retired 2026-08-19 with its slide — the gate slide's lede
+now carries the second-program mechanism, its notes carry the division-of-labour aside, and the
+format:check gap-hunt lives on as **self-guided** material in
+`docs/labs/lab-2b-demo-4-ci-walkthrough.md`. Demo 4 is reference material, not a live demo.)_
 
 ## 6. Rescue code (never on screen — Slack it to a stuck student, one piece at a time)
 

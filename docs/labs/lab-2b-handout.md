@@ -266,20 +266,30 @@ should nudge** — an imperfect block stops real work, an imperfect nudge costs 
 **Checkpoint:** your hook fires on the violation, stays silent on a legitimate edit, and its
 text is in your PR.
 
-### 3. The same rule at merge time — the CI gate
+### 3. The same rule, written again — the CI gate
 
-The hook stops the agent. This stops anyone — it's the moment `--no-verify` can't reach.
+One thing to be clear about first: **GitHub cannot run your Claude hook.** Your hook is a
+program that Claude Code executes on *your* machine when *your* agent writes — GitHub has no
+Claude Code and no agent, so nothing there can fire it. Instead, you write the **same check a
+second time**, as a grep inside a workflow file, and GitHub runs *that* on every pull request —
+for everyone, on every machine, with no way around it. Two programs, one rule.
+
 Your gate joins the checks that already run on every PR (lint · typecheck · tests — read them in
 [`lab-2b-demo-4-ci-walkthrough.md`](lab-2b-demo-4-ci-walkthrough.md), which also hides a
-find-the-unenforced-rule exercise). Start from `docs/labs/snippets/governance-gate.yml`,
-copy it to `.github/workflows/governance.yml`, and encode **your rule's check** — the same
-detection your hook runs, applied to the PR's changed files.
-Note the `fetch-depth: 0` comment — without it any diff against the base branch fails with an
-unhelpful error. And the gotcha that catches half of every cohort: **the gate runs on
-`pull_request`** — push your branch and **open a draft PR**, or nothing runs and your gate will
-look broken when it's merely unasked.
+find-the-unenforced-rule exercise). The steps:
 
-**Checkpoint:** your gate fails a PR that violates your rule and passes one that doesn't.
+1. Copy `docs/labs/snippets/governance-gate.yml` → `.github/workflows/governance.yml` — the
+   skeleton has the checkout (with the required `fetch-depth: 0` — without it any diff against
+   the base branch fails with an unhelpful error), the changed-files list, and an example check.
+2. Replace the example check with **your rule's grep** — the same detection your
+   `check-convention.js` runs, applied to the PR's changed files.
+3. Commit, push — and **open a draft PR**. The gotcha that catches half of every cohort: the
+   gate runs on `pull_request`, so a pushed branch alone runs nothing, and your gate will look
+   broken when it's merely unasked.
+4. Violate your rule in the PR → the check goes **red**. Fix it, push → **green**.
+
+**Checkpoint:** your gate fails a PR that violates your rule and passes one that doesn't —
+red-then-green is your evidence.
 
 _(Notice your gate's behavior on a docs-only PR — if it fires there, a path filter is the
 one-line fix.)_
