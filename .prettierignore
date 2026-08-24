@@ -1,0 +1,3 @@
+# Vendored upstream: the Hypr framework is copied in verbatim so the lab works
+# without access to its private marketplace. Reformatting it would fork it.
+.claude/plugins/
