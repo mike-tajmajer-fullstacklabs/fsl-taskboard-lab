@@ -11,5 +11,3 @@ server/data/db.json
 # Deck build tooling — regenerates the instructor decks, not part of the lab
 docs/instructor/build/
 
-# Per-machine Claude Code settings (created by `npm run hypr:setup`)
-.claude/settings.local.json
