@@ -43,8 +43,6 @@ npm run dev          # client on http://localhost:5173, API on http://localhost:
 | `npm test`                           | All tests (`-w server` / `-w client` for one tier) |
 | `npm run lint` / `npm run typecheck` | What CI runs on every PR                           |
 | `npm run reset-db`                   | Restore the database to the canonical seed         |
-| `npm run hypr:setup`                 | Install the bundled Hypr framework (Lab 3)         |
-| `npm run hypr:teardown`              | Remove it again after the lab                      |
 
 ## Architecture at a glance
 
@@ -72,52 +70,11 @@ project context file, worth reading on its own.
   database-safety guardrail.
 - **Lab 3 — Hypr pipeline.** The repeated conventions across route/service/
   repository files and the parallel component slices are what
-  pattern assessment extracts. Run `npm run hypr:setup` once (see
-  [Hypr for Lab 3](#hypr-for-lab-3)), run the assessment here, then ship a
-  scoped feature chunk through the generated agents.
+  pattern assessment extracts. Run the assessment here, then ship a scoped
+  feature chunk through the generated agents.
 - **Lab 4 — Capstone.** Author your own artifact in `.claude/` (subagent,
   skill, workflow automation) or a governance doc, and use it on a real task
   in this repo.
-
-## Hypr for Lab 3
-
-Hypr lives in a private marketplace, so this repo ships a pinned copy of it in
-[.claude/plugins/hypr/](.claude/plugins/hypr/) — no access to the upstream repo
-needed. Register and install it once per machine:
-
-```bash
-npm run hypr:setup
-```
-
-That runs two Claude Code commands: it registers `.claude/plugins/hypr` as a
-local marketplace named `hypr-lab`, then installs the `hypr` plugin from it.
-Restart Claude Code afterwards and `/hypr:assess`, `/hypr:plan`,
-`/hypr:build-chunk` and the rest are available. Re-running it is safe.
-
-Both commands use `--scope local`, so Hypr is enabled **in this repo only** —
-your other projects are untouched. The wiring lands in
-`.claude/settings.local.json`, which is gitignored because it holds an absolute
-path specific to your machine; the committed `.claude/settings.json` stays as
-Lab 2 left it.
-
-To remove it after the lab:
-
-```bash
-npm run hypr:teardown
-```
-
-That uninstalls the plugin and drops the marketplace registration. If the
-plugin isn't installed it stops there and leaves the marketplace alone — remove
-that on its own with `claude plugin marketplace remove hypr-lab`.
-
-> Already using Hypr from the real marketplace? Local scope keeps the two apart
-> here, but a user-scope `hypr` stays active in this repo as well — disable it
-> for the duration of the lab.
-
-`/hypr:conformance` and the ast-grep half of `/hypr:review` are out of scope for
-this lab — nobody installs `ast-grep`, so `/hypr:review` notes that its
-mechanical pass was skipped and reviews every rule by judgement instead. That
-line in the report is expected, not a broken setup.
 
 ## Known quirks
 
@@ -135,10 +92,6 @@ line in the report is expected, not a broken setup.
   proxy targets 3001, so change both if you move it.
 - **Node version errors:** `nvm use` (needs ≥ 20; Vite requires 20.19+).
 - **Weird data state:** `npm run reset-db` restores the seed.
-- **Windows and Hypr:** `npm run hypr:setup` / `hypr:teardown` work as-is (both
-  run through `cmd.exe`). Hypr's own post-edit hook is a bash script, though, so
-  install Git for Windows if you want it — without bash on PATH the hook is
-  skipped, which costs you a per-edit reminder and nothing else.
 - **Windows:** use the PowerShell scripts (`.\scripts\setup-repo.ps1`,
   `.\scripts\seed-issues.ps1`) — they mirror the `.sh` versions. If your
   execution policy blocks them, run
