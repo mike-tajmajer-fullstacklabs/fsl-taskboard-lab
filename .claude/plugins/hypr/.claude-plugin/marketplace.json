@@ -1,0 +1,14 @@
+{
+  "name": "hypr-lab",
+  "description": "Hypr — generate AI agents pre-loaded with your project's patterns, plus optional quality and accessibility agents.",
+  "owner": {
+    "name": "FullStack Engineering"
+  },
+  "plugins": [
+    {
+      "name": "hypr",
+      "source": "./",
+      "description": "AI-driven framework for extracting project patterns and generating specialized agents"
+    }
+  ]
+}
