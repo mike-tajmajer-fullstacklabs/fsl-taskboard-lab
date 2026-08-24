@@ -11,3 +11,9 @@ server/data/db.json
 # Deck build tooling — regenerates the instructor decks, not part of the lab
 docs/instructor/build/
 
+# Hypr framework — private FullStack code, distributed as a zip for Lab 3.
+# This repo is public: never commit it.
+.claude/plugins/
+
+# Per-machine Claude Code settings (written by `npm run hypr:setup`)
+.claude/settings.local.json
