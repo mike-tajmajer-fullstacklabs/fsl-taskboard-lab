@@ -7,8 +7,8 @@ you've built — this is the formal capstone of the program.
 **Duration:** self-built through week 6 (office hours + teaming up with other developers); one ~2-hr block at Demo Day.
 **Surface:** real code — this repo or your own team's work.
 
-**The challenge.** Pick **one** artifact from the menu, build it on real code, prove it in at
-least one real instance, commit and share it with the team, and present it at Demo Day.
+**The challenge.** Pick **one** artifact from the menu, build it on real code, show it working at
+least once, commit and share it with the team, and present it at Demo Day.
 
 ## Pick one artifact
 
@@ -25,27 +25,28 @@ An MCP server can be a **small local script** (Python or Node) that Claude Code 
 machine, or a **remote service** — either is a valid capstone. Start **read-only**, fewest useful
 operations, config included; prep is the self-paced _Extending Claude Code_ module.
 
-**Evidence — the same three things for every artifact:** an **impact note** in your own words
-(what it saves or improves — "before, this was all manual" is a fine story; numbers only if you
-have them), a **named teammate who will adopt it**, and a short **"how to use" README**.
+**Evidence — two things for every artifact:** an **impact note** in your own words (what it saves
+or improves — "before, this was all manual" is a fine story; numbers only if you have them), and a
+short **"how to use" README**. If it is something the team will pick up, also name the **teammate
+who will adopt it**.
 
-**Your 10 minutes on Demo Day (max, per developer or paired entry):**
+**Your 8 minutes on Demo Day (max, per developer or paired entry):**
 
 1. **Come on live** and share your screen.
 2. **Introduce your artifact** — what it is and the problem it removes (~2 min).
-3. **Practical demonstration** — run it on real work, live (~5 min).
-4. **Questions & answers** from the room (~3 min).
+3. **Practical demonstration** — run it on real work, live (~4 min).
+4. **Questions & answers** from the room (~2 min).
 
 **Done means:**
 
-- [ ] one owned, committed, team-shared artifact from the menu
-- [ ] used or validated in at least one real instance
-- [ ] the three evidence items
+- [ ] one artifact you own, from the menu
+- [ ] shown working at least once
+- [ ] the evidence items
 - [ ] Demo Day presentation delivered — counts toward **Framework Practitioner** (a governance-doc capstone still certifies)
 
 **Stuck?** "Nothing to automate" is fine — ship a skill, doc, or connector. Scope too big — build
 the smallest useful version (start from the automation-asks list or your Lab 2 work). No adopter
-yet — recruit one teammate. That's the point.
+yet — recruit one teammate if the team will use it. That's the point.
 
 <style>
 /* One-page fit for the PDF export only — GitHub strips this block when rendering. */
